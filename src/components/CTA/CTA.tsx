@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { PrimaryButton, SecondaryButton } from "@/components/styles/buttons"
 import { useCTA } from "./useCTA"
 
 export const CTA = () => {
@@ -19,20 +19,23 @@ export const CTA = () => {
             Get a modern store with everything set up — just plug in your products and go live.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="text-lg px-8 py-6 rounded-full transition-all duration-300 bg-black text-white hover:bg-black/80 hover:scale-105"
+            <PrimaryButton
+              onClick={() => {
+                document.getElementById('pricing')?.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start'
+                })
+              }}
             >
               Start Now
               <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-            <Button
+            </PrimaryButton>
+            <SecondaryButton
               size="lg"
-              variant="outline"
-              className="text-lg px-8 py-6 rounded-full transition-all duration-300 border-black text-black bg-transparent hover:bg-black hover:text-white hover:scale-105"
+              onClick={() => window.open("https://infideli.vercel.app/", "_blank")}
             >
               View Live Demo
-            </Button>
+            </SecondaryButton>
           </div>
         </motion.div>
       </div>

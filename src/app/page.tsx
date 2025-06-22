@@ -8,6 +8,7 @@ import { Demo } from "@/components/Demo/Demo"
 import { Contact } from "@/components/Contact/Contact"
 import { CTA } from "@/components/CTA/CTA"
 
+
 export default function EcommerceSaaSLanding() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-amber-50 to-pink-300">

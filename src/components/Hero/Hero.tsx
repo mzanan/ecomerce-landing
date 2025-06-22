@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { PrimaryButton, SecondaryButton } from "@/components/styles/buttons"
 
 import { useHero } from "./useHero"
 
@@ -33,25 +33,25 @@ export const Hero = () => {
 
             <motion.div className="flex flex-col sm:flex-row gap-4 justify-center" {...fadeInUp}>
               <motion.div {...fadeInUp}>
-                <Button
-                  size="lg"
-                  className="text-lg px-8 py-6 rounded-full transition-all duration-300 bg-black text-white hover:bg-black/80 hover:scale-105"
+                <PrimaryButton
+                  onClick={() => {
+                    document.getElementById('pricing')?.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                    })
+                  }}
                 >
                   Start Your Store Now
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
+                </PrimaryButton>
               </motion.div>
               <motion.div {...fadeInUp}>
-                <Button
+                <SecondaryButton
                   size="lg"
-                  variant="outline"
-                  className="text-lg px-8 py-6 rounded-full transition-all duration-300 border-black text-black bg-transparent hover:bg-black hover:text-white hover:scale-105"
-                  asChild
+                  onClick={() => window.open("https://infideli.vercel.app/", "_blank")}
                 >
-                  <Link href="https://demo.lingeriestore.com" target="_blank">
-                    View Live Demo
-                  </Link>
-                </Button>
+                  View Live Demo
+                </SecondaryButton>
               </motion.div>
             </motion.div>
           </div>

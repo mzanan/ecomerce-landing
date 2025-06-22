@@ -1,4 +1,7 @@
-import { NavigationItem } from "@/types"
+interface NavigationItem {
+  href: string
+  label: string
+}
 
 export const useHeader = () => {
   const navigationItems: NavigationItem[] = [

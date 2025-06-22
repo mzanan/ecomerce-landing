@@ -1,8 +1,7 @@
 "use client"
 
-import Link from "next/link"
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+import { PrimaryButton, LinkButton } from "@/components/styles/buttons"
 import { useHeader } from "./useHeader"
 
 export const Header = () => {
@@ -21,24 +20,40 @@ export const Header = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent pointer-events-none"></div>
 
         <div className="relative px-6 flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold text-black">
+          <LinkButton 
+            variant="brand"
+            onClick={() => window.location.href = "/"}
+          >
             GVT Devs
-          </Link>
-          <nav className="hidden md:flex items-center space-x-8">
-            {navigationItems.map((item, index) => (
-              <Link
-                key={`${item.href}-${index}`}
-                href={item.href}
-                className="transition-all duration-300 text-sm px-4 py-2 rounded-full text-black hover:bg-black/5"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          </LinkButton>
+                      <nav className="hidden md:flex items-center space-x-8">
+              {navigationItems.map((item, index) => (
+                <LinkButton
+                  key={`${item.href}-${index}`}
+                  variant="nav"
+                  onClick={() => {
+                    const sectionId = item.href.replace('#', '')
+                    document.getElementById(sectionId)?.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                    })
+                  }}
+                >
+                  {item.label}
+                </LinkButton>
+              ))}
+            </nav>
           <div className="flex items-center">
-            <Button className="font-medium px-6 py-2 rounded-full text-sm transition-all duration-300 bg-black text-white hover:bg-black/80">
+            <PrimaryButton 
+              onClick={() => {
+                document.getElementById('pricing')?.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start'
+                })
+              }}
+            >
               Start Your Store Today
-            </Button>
+            </PrimaryButton>
           </div>
         </div>
       </motion.div>
