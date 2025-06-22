@@ -1,4 +1,4 @@
-import { PricingPlan } from "@/types"
+import { PricingPlan } from "./usePricing.types"
 import { useAnimations } from "@/hooks/useAnimations"
 
 export const usePricing = () => {
@@ -34,7 +34,7 @@ export const usePricing = () => {
         "Fully Custom Design (look & feel, branding, structure)",
       ],
     },
-  ];
+  ]
 
   return {
     pricingPlans,
