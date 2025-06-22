@@ -1,6 +1,6 @@
 import { useAnimations } from "@/hooks/useAnimations"
 import { useEffect, useRef, useState, useMemo } from "react"
-import { DemoFeature } from "@/types"
+import { DemoFeature } from "./useDemo.types"
 
 export const useDemo = () => {
   const { fadeInUp, fadeInLeft, fadeInRight } = useAnimations()

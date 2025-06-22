@@ -6,7 +6,7 @@ import {
   Palette,
   Lock
 } from "lucide-react"
-import { Feature } from "@/types"
+import { Feature } from "./useFeatures.types"
 import { useAnimations } from "@/hooks/useAnimations"
 
 export const useFeatures = () => {
