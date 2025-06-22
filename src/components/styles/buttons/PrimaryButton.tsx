@@ -1,10 +1,8 @@
 import { BaseButton, BaseButtonProps } from "./BaseButton"
 
-interface PrimaryButtonProps extends Omit<BaseButtonProps, 'baseClasses'> {}
-
 export const PrimaryButton = ({ 
   ...props 
-}: PrimaryButtonProps) => {
+}: Omit<BaseButtonProps, 'baseClasses'>) => {
   const primaryClasses = "font-medium rounded-full bg-black text-white hover:bg-black/80"
 
   return (

@@ -49,8 +49,8 @@ export function usePolarEmbedded() {
       checkout.close = () => {
         try {
           origClose();
-        } catch (err: any) {
-          if (err.name === "NotFoundError") {
+        } catch (err: unknown) {
+          if (err instanceof Error && err.name === "NotFoundError") {
             console.warn("Polar modal close triggered NotFoundError — ignorado");
             return;
           }

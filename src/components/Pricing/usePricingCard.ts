@@ -64,7 +64,7 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
       toast.error('Failed to open checkout')
       setIsLoading(false)
     }
-  }, [productKey, planName, openCheckout, getProductPrice, isLoading])
+  }, [productKey, planName, openCheckout, getProductPrice])
 
   return { handleGetStarted, isLoading }
 } 
