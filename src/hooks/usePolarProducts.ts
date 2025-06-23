@@ -1,55 +1,28 @@
 import { useState, useCallback, useEffect } from "react";
 import { PolarProduct } from "@/types";
 
-type PolarProductKey = 'launch-ready' | 'custom-pro';
-
 export function usePolarProducts() {
-  const [products, setProducts] = useState<Record<string, PolarProduct>>({});
+  const [products, setProducts] = useState<PolarProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createOrGetProduct = useCallback(async (productKey: PolarProductKey) => {
+  const fetchProducts = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('/api/polar/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ productKey })
-      });
+      const response = await fetch('/api/polar/products');
 
       if (!response.ok) {
-        if (response.status === 404) {
-          throw new Error(`Producto "${productKey}" no encontrado. Crear manualmente en Polar dashboard.`);
-        }
-        throw new Error('Failed to get product');
+        throw new Error('Failed to fetch products');
       }
 
       const data = await response.json();
+      setProducts(data.products || []);
       
-      const product: PolarProduct = {
-        id: data.productId,
-        name: data.product.name,
-        description: data.product.description,
-        prices: [{
-          id: data.priceId,
-          amount: data.price.amount,
-          currency: data.price.currency,
-          type: 'one_time'
-        }]
-      };
-
-      setProducts(prev => ({
-        ...prev,
-        [productKey]: product
-      }));
-
-      return product;
+      return data.products || [];
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Failed to get product";
+      const errorMessage = err instanceof Error ? err.message : "Failed to fetch products";
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
@@ -57,37 +30,29 @@ export function usePolarProducts() {
     }
   }, []);
 
-  const getProductPrice = useCallback(async (productKey: PolarProductKey) => {
-    let product = products[productKey];
-    
-    if (!product) {
-      product = await createOrGetProduct(productKey);
-    }
-    
-    return product?.prices[0]?.id;
-  }, [products, createOrGetProduct]);
+  const getProductById = useCallback((productId: string) => {
+    return products.find(product => product.id === productId);
+  }, [products]);
 
-  // Initialize products on mount
+  const getProductByName = useCallback((name: string) => {
+    return products.find(product => product.name === name);
+  }, [products]);
+
+  const getProductPrice = useCallback((product: PolarProduct) => {
+    return product?.prices?.[0]?.id;
+  }, []);
+
   useEffect(() => {
-    const initializeProducts = async () => {
-      try {
-        await Promise.all([
-          createOrGetProduct("launch-ready"),
-          createOrGetProduct("custom-pro")
-        ]);
-      } catch (error) {
-        console.error("Failed to initialize products:", error);
-      }
-    };
-
-    initializeProducts();
-  }, [createOrGetProduct]);
+    fetchProducts();
+  }, [fetchProducts]);
 
   return {
     products,
     isLoading,
     error,
-    createOrGetProduct,
+    fetchProducts,
+    getProductById,
+    getProductByName,
     getProductPrice,
   };
 } 

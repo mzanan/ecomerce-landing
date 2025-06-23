@@ -1,10 +1,5 @@
-import { Polar } from "@polar-sh/sdk";
 import { NextRequest, NextResponse } from "next/server";
-
-const polar = new Polar({
-  accessToken: process.env.POLAR_ACCESS_TOKEN!,
-  server: process.env.NODE_ENV === "production" ? "production" : "sandbox",
-});
+import { polar } from "@/lib/polar";
 
 export async function GET(request: NextRequest) {
   try {
@@ -16,22 +11,21 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Price ID required' }, { status: 400 });
     }
 
-    const productId = await getExistingProduct(priceId);
+    const productId = await getProductByPriceId(priceId);
     
     if (!productId) {
       return NextResponse.json(
-        { error: "Product not found. Please create the product manually in the Polar dashboard first." },
+        { error: "Product not found for the given price ID" },
         { status: 404 }
       );
     }
 
-    // Obtener el origen desde los headers de la request
     const origin = request.headers.get('origin') || request.headers.get('referer')?.split('/').slice(0, 3).join('/');
     
     const checkout = await polar.checkouts.create({
       products: [productId],
       metadata: metadata ? JSON.parse(decodeURIComponent(metadata)) : undefined,
-      embedOrigin: origin, // Crucial para que funcione el botón de cerrar
+      embedOrigin: origin,
     });
     
     return NextResponse.json({ 
@@ -47,36 +41,20 @@ export async function GET(request: NextRequest) {
   }
 }
 
-async function getExistingProduct(priceId: string): Promise<string | null> {
-  const productConfigs = {
-    'price_launch-ready': {
-      name: 'Launch Ready',
-      description: 'Complete website launch package',
-      price: 150000,
-    },
-    'price_custom-pro': {
-      name: 'Custom Pro',
-      description: 'Premium custom development package',
-      price: 200000,
-    }
-  };
-
-  const config = productConfigs[priceId as keyof typeof productConfigs];
-  if (!config) {
-    throw new Error('Invalid price ID');
-  }
-
+async function getProductByPriceId(priceId: string): Promise<string | null> {
   try {
-    const existingProducts = await polar.products.list({});
-    const existingProduct = existingProducts.result?.items?.find((product: { name: string; id: string }) => product.name === config.name);
+    const productsResponse = await polar.products.list({});
+    const products = productsResponse.result?.items || [];
     
-    if (existingProduct) {
-      return existingProduct.id;
+    for (const product of products) {
+      if (product.prices?.some(price => price.id === priceId)) {
+        return product.id;
+      }
     }
     
     return null;
   } catch (error) {
-    console.error('Error listing products:', error);
+    console.error('Error finding product by price ID:', error);
     throw error;
   }
 } 

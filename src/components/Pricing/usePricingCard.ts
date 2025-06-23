@@ -11,7 +11,7 @@ interface UsePricingCardProps {
 export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) => {
   const [isLoading, setIsLoading] = useState(false)
   const { openCheckout } = usePolarEmbedded()
-  const { getProductPrice } = usePolarProducts()
+  const { products, isLoading: productsLoading, getProductByName, getProductPrice } = usePolarProducts()
   const listenerAttached = useRef(false)
 
   useEffect(() => {
@@ -37,14 +37,33 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
     }
   }, [])
 
+  const getProductName = (key: string) => {
+    return key === 'launch-ready' ? 'Launch Ready' : 'Custom Pro'
+  }
+
   const handleGetStarted = useCallback(async () => {
-    
+    if (productsLoading || products.length === 0) {
+      toast.error('Loading products, please wait...')
+      return
+    }
+
     try {
       setIsLoading(true)
-      const priceId = await getProductPrice(productKey)
+      
+      const productName = getProductName(productKey)
+      const product = getProductByName(productName)
+      
+      if (!product) {
+        console.error('❌ Product not found for:', productKey, productName);
+        toast.error('Product not found')
+        setIsLoading(false)
+        return
+      }
+
+      const priceId = getProductPrice(product)
       
       if (!priceId) {
-        console.error('❌ Price not found for:', productKey);
+        console.error('❌ Price not found for product:', product);
         toast.error('Price not found')
         setIsLoading(false)
         return
@@ -64,7 +83,10 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
       toast.error('Failed to open checkout')
       setIsLoading(false)
     }
-  }, [productKey, planName, openCheckout, getProductPrice])
+  }, [productKey, planName, openCheckout, getProductByName, getProductPrice, productsLoading, products])
 
-  return { handleGetStarted, isLoading }
+  return { 
+    handleGetStarted, 
+    isLoading: isLoading || productsLoading 
+  }
 } 

@@ -1,80 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Polar } from "@polar-sh/sdk";
+import { polar } from "@/lib/polar";
 
-const polar = new Polar({
-  accessToken: process.env.POLAR_ACCESS_TOKEN!,
-  server: process.env.NODE_ENV === "production" ? "production" : "sandbox",
-});
-
-const POLAR_PRODUCTS_CONFIG = {
-  "launch-ready": {
-    name: "Launch Ready",
-    description: "Complete website launch package",
-    price: 150000,
-  },
-  "custom-pro": {
-    name: "Custom Pro",
-    description: "Premium custom development package",
-    price: 200000,
-  }
-} as const;
-
-async function getExistingProduct(productKey: string): Promise<string | null> {
-  const config = POLAR_PRODUCTS_CONFIG[productKey as keyof typeof POLAR_PRODUCTS_CONFIG];
-  if (!config) {
-    throw new Error('Invalid product key');
-  }
-
+export async function GET() {
   try {
-    const existingProducts = await polar.products.list({});
-    const existingProduct = existingProducts.result?.items?.find((product: { name: string; id: string }) => product.name === config.name);
+    const response = await polar.products.list({});
     
-    if (existingProduct) {
-      return existingProduct.id;
-    }
-    
-    return null;
+    return NextResponse.json({
+      products: response.result?.items || [],
+      success: true
+    });
   } catch (error) {
-    console.error('Error listing products:', error);
-    throw error;
+    console.error("Error listing products:", error);
+    
+    return NextResponse.json({
+      error: "Failed to list products"
+    }, { status: 500 });
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const { productKey } = await request.json();
+    const { productId } = await request.json();
     
-    if (!productKey || !(productKey in POLAR_PRODUCTS_CONFIG)) {
+    if (!productId) {
       return NextResponse.json(
-        { error: "Invalid product key" },
+        { error: "Product ID is required" },
         { status: 400 }
       );
     }
 
-    const productId = await getExistingProduct(productKey);
-    
-    if (!productId) {
-      return NextResponse.json(
-        { error: "Product not found. Please create the product manually in the Polar dashboard first." },
-        { status: 404 }
-      );
-    }
-    
-    const config = POLAR_PRODUCTS_CONFIG[productKey as keyof typeof POLAR_PRODUCTS_CONFIG];
+    const product = await polar.products.get({ id: productId });
 
     return NextResponse.json({
-      productId,
-      priceId: `price_${productKey}`,
-      product: {
-        id: productId,
-        name: config.name,
-        description: config.description
-      },
-      price: {
-        id: `price_${productKey}`,
-        amount: config.price,
-        currency: 'usd'
-      },
+      product,
       success: true
     });
 
@@ -83,27 +41,6 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json({
       error: "Failed to process product request"
-    }, { status: 500 });
-  }
-}
-
-export async function GET() {
-  try {
-    return NextResponse.json({
-      products: Object.entries(POLAR_PRODUCTS_CONFIG).map(([key, config]) => ({
-        id: `prod_${key}`,
-        name: config.name,
-        description: config.description,
-        priceId: `price_${key}`,
-        amount: config.price,
-        currency: 'usd'
-      }))
-    });
-  } catch (error) {
-    console.error("Error listing products:", error);
-    
-    return NextResponse.json({
-      error: "Failed to list products"
     }, { status: 500 });
   }
 } 

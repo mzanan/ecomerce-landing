@@ -1,7 +1,8 @@
 import { CustomerPortal } from "@polar-sh/nextjs";
+import { getAccessToken, getServer } from "@/lib/polar";
 
 export const GET = CustomerPortal({
-  accessToken: process.env.POLAR_ACCESS_TOKEN!,
+  accessToken: getAccessToken(),
   getCustomerId: () => Promise.resolve(""),
-  server: process.env.NODE_ENV === "production" ? "production" : "sandbox",
+  server: getServer(),
 }); 
