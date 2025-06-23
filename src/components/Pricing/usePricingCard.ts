@@ -8,6 +8,11 @@ interface UsePricingCardProps {
   planName: string
 }
 
+const PRODUCT_NAMES = {
+  'launch-ready': 'Launch Ready',
+  'custom-pro': 'Custom Pro'
+} as const;
+
 export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) => {
   const [isLoading, setIsLoading] = useState(false)
   const { openCheckout } = usePolarEmbedded()
@@ -37,24 +42,26 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
     }
   }, [])
 
-  const getProductName = (key: string) => {
-    return key === 'launch-ready' ? 'Launch Ready' : 'Custom Pro'
-  }
-
   const handleGetStarted = useCallback(async () => {
-    if (productsLoading || products.length === 0) {
+    if (productsLoading) {
       toast.error('Loading products, please wait...')
+      return
+    }
+
+    if (products.length === 0) {
+      toast.error('No products available')
       return
     }
 
     try {
       setIsLoading(true)
       
-      const productName = getProductName(productKey)
+      const productName = PRODUCT_NAMES[productKey]
       const product = getProductByName(productName)
       
       if (!product) {
-        console.error('❌ Product not found for:', productKey, productName);
+        console.error('❌ Product not found for:', productKey, 'with name:', productName);
+        console.log('📋 Available products:', products.map(p => p.name));
         toast.error('Product not found')
         setIsLoading(false)
         return
@@ -68,6 +75,8 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
         setIsLoading(false)
         return
       }
+
+      console.log('🚀 Opening checkout for:', productName, 'with price:', priceId);
 
       await openCheckout({
         priceId,

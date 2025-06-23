@@ -102,7 +102,7 @@ export const Demo = () => {
                   </motion.div>
 
                   <motion.div
-                    className="flex-1 h-[400px]"
+                    className="flex-1 md:h-[400px]"
                     custom={isEven}
                     variants={textVariants}
                   >

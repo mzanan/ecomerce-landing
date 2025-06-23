@@ -3,10 +3,6 @@ import { polar } from "@/lib/polar";
 
 export async function GET() {
   try {
-    console.log('🔧 NODE_ENV:', process.env.NODE_ENV);
-    console.log('🔧 POLAR_ACCESS_TOKEN_PROD exists:', !!process.env.POLAR_ACCESS_TOKEN_PROD);
-    console.log('🔧 POLAR_ACCESS_TOKEN_SANDBOX exists:', !!process.env.POLAR_ACCESS_TOKEN_SANDBOX);
-    
     const response = await polar.products.list({});
     
     return NextResponse.json({
