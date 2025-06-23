@@ -27,6 +27,21 @@ export const useDemo = () => {
     setOpenedMedia(null)
   }
 
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && openedMedia) {
+        handleCloseModal()
+      }
+    }
+
+    if (openedMedia) {
+      document.addEventListener('keydown', handleEscKey)
+      return () => {
+        document.removeEventListener('keydown', handleEscKey)
+      }
+    }
+  }, [openedMedia])
+
   const demoFeatures = useMemo<DemoFeature[]>(() => [
     {
       title: "Interactive Landing Experience",

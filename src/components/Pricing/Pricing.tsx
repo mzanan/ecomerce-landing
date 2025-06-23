@@ -15,7 +15,7 @@ export const Pricing = () => {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.5 }}
         >
           <h2 className="text-4xl lg:text-6xl font-bold text-black">
             Choose your plan

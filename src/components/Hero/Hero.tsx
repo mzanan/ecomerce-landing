@@ -30,9 +30,11 @@ export const Hero = () => {
               </motion.p>
             </div>
 
-            <motion.div className="flex flex-col sm:flex-row gap-4 justify-center" {...fadeInUp}>
-              <motion.div {...fadeInUp}>
+            <motion.div className="flex flex-col sm:flex-row gap-4 items-center justify-center" {...fadeInUp}>
+              <motion.div className="w-full sm:w-auto" {...fadeInUp}>
                 <PrimaryButton
+                  fullWidth
+                  className="sm:w-auto"
                   onClick={() => {
                     document.getElementById('pricing')?.scrollIntoView({
                       behavior: 'smooth',
@@ -44,9 +46,11 @@ export const Hero = () => {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </PrimaryButton>
               </motion.div>
-              <motion.div {...fadeInUp}>
+              <motion.div className="w-full sm:w-auto" {...fadeInUp}>
                 <SecondaryButton
+                  fullWidth
                   size="lg"
+                  className="sm:w-auto"
                   onClick={() => window.open("https://infideli.vercel.app/", "_blank")}
                 >
                   View Live Demo

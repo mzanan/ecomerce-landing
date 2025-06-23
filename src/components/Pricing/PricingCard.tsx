@@ -28,7 +28,7 @@ export const PricingCard = ({ plan, productKey }: PricingCardProps) => {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.2, delay: plan.highlighted ? 0.4 : 0.2 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.5 }}
     >
       {plan.highlighted && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-black text-white px-4 py-1 rounded-full text-sm font-medium z-10">

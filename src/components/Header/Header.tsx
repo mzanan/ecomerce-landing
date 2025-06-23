@@ -26,23 +26,23 @@ export const Header = () => {
           >
             GVT Devs
           </LinkButton>
-                      <nav className="hidden md:flex items-center space-x-8">
-              {navigationItems.map((item, index) => (
-                <LinkButton
-                  key={`${item.href}-${index}`}
-                  variant="nav"
-                  onClick={() => {
-                    const sectionId = item.href.replace('#', '')
-                    document.getElementById(sectionId)?.scrollIntoView({
-                      behavior: 'smooth',
-                      block: 'start'
-                    })
-                  }}
-                >
-                  {item.label}
-                </LinkButton>
-              ))}
-            </nav>
+          <nav className="hidden lg:flex items-center space-x-8">
+            {navigationItems.map((item, index) => (
+              <LinkButton
+                key={`${item.href}-${index}`}
+                variant="nav"
+                onClick={() => {
+                  const sectionId = item.href.replace('#', '')
+                  document.getElementById(sectionId)?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                  })
+                }}
+              >
+                {item.label}
+              </LinkButton>
+            ))}
+          </nav>
           <div className="flex items-center">
             <PrimaryButton 
               onClick={() => {

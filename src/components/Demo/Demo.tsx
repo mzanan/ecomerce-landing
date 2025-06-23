@@ -85,13 +85,15 @@ export const Demo = () => {
                             ref={(el) => {
                               mediaRefs.current[index] = el
                             }}
-                            className="w-full h-full"
+                            className="w-full h-full flex items-center justify-center bg-gray-100 rounded-2xl overflow-hidden"
                           >
                             <Image
                               src={feature.media}
                               alt={feature.title}
-                              fill
-                              className="w-full h-full object-cover rounded-2xl"
+                              width={800}
+                              height={600}
+                              priority={index < 2}
+                              className="w-full h-full object-cover"
                             />
                           </div>
                         )}
@@ -148,15 +150,14 @@ export const Demo = () => {
             onClick={handleCloseModal}
           >
             <motion.div
-              className="relative max-w-6xl max-h-full w-full h-full flex items-center justify-center"
+              className="relative max-w-6xl max-h-full flex items-center justify-center"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
-              onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={handleCloseModal}
-                className="absolute top-4 right-4 z-10 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors"
+                className="absolute top-4 right-4 z-50 bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors backdrop-blur-sm"
               >
                 <X className="w-6 h-6 text-white" />
               </button>
@@ -169,9 +170,10 @@ export const Demo = () => {
                   loop
                   controls
                   className="max-w-full max-h-full rounded-2xl"
+                  onClick={(e) => e.stopPropagation()}
                 />
               ) : (
-                <div className="relative max-w-full max-h-full">
+                <div className="relative max-w-full max-h-full" onClick={(e) => e.stopPropagation()}>
                   <Image
                     src={openedMedia.feature.media}
                     alt={openedMedia.feature.title}
