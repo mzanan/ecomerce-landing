@@ -1,12 +1,7 @@
 import { useAnimations } from "@/hooks/useAnimations"
 import { useState } from "react"
-
-interface ContactForm {
-  name: string
-  email: string
-  subject: string
-  message: string
-}
+import { toast } from "sonner"
+import { ContactForm, ContactApiResponse } from "./useContact.types"
 
 export const useContact = () => {
   const { fadeInUp } = useAnimations()
@@ -33,22 +28,42 @@ export const useContact = () => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-
-    setIsSubmitted(true)
-    setIsSubmitting(false)
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       })
-      setIsSubmitted(false)
-    }, 3000)
+
+      const data: ContactApiResponse = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+
+      setIsSubmitted(true)
+      toast.success('Message sent successfully!')
+
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        })
+        setIsSubmitted(false)
+      }, 3000)
+
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to send message'
+      toast.error(errorMessage)
+      console.error('Contact form error:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const formVariants = {

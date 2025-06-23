@@ -14,9 +14,6 @@ POLAR_ACCESS_TOKEN=polar_pat_your_token_here
 POLAR_WEBHOOK_SECRET=your_webhook_secret_here
 POLAR_WEBHOOK_URL=https://ltvtyxhdljqlgjfbjbuz.supabase.co/functions/v1/polar-webhooks
 
-# Success URL for checkout
-SUCCESS_URL=http://localhost:3000/confirmation?checkout_id={CHECKOUT_ID}
-
 # App Configuration
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
