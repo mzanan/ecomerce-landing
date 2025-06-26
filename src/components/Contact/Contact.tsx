@@ -15,9 +15,9 @@ export const Contact = () => {
     formData,
     isSubmitting,
     isSubmitted,
+    formVariants,
     handleInputChange,
-    handleSubmit,
-    formVariants
+    handleSubmit
   } = useContact()
 
   return (

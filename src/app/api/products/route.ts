@@ -3,13 +3,9 @@ import { polar } from '@/lib/polar';
 
 export async function GET() {
   try {
-    console.log('🔍 Fetching products from Polar API...');
-    
     const response = await polar.products.list({
       isArchived: false
     });
-    
-    console.log('✅ Products fetched successfully:', response.result?.items?.length || 0);
     
     return NextResponse.json({
       success: true,

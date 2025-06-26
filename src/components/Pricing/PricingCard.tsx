@@ -10,6 +10,7 @@ interface PricingCardProps {
   plan: {
     name: string
     price: string
+    tagline: string
     features: string[]
     highlighted?: boolean
   }
@@ -17,7 +18,7 @@ interface PricingCardProps {
 }
 
 export const PricingCard = ({ plan, productKey }: PricingCardProps) => {
-  const { isLoading, handleGetStarted } = usePricingCard({
+  const { isLoading, handleGetStarted, getButtonText } = usePricingCard({
     productKey,
     planName: plan.name
   })
@@ -39,14 +40,17 @@ export const PricingCard = ({ plan, productKey }: PricingCardProps) => {
               backdrop-blur-sm border border-gray-200/50 bg-white/10 shadow-lg rounded-xl">
         <div className="space-y-6 flex-1 flex flex-col">
           <div className="space-y-2">
-            <h3 className="text-2xl font-bold text-black">
+            <h3 className="text-2xl font-bold text-black text-center">
               {plan.name}
             </h3>
-            <div className="flex items-baseline">
-              <span className="text-4xl font-bold text-black">
+            <div className="flex items-baseline w-full">
+              <span className="text-4xl font-bold text-black w-full text-center">
                 {plan.price}
               </span>
             </div>
+            <p className="text-gray-600 text-sm leading-relaxe text-center">
+              {plan.tagline}
+            </p>
           </div>
 
           <ul className="space-y-3 flex-1">
@@ -67,7 +71,7 @@ export const PricingCard = ({ plan, productKey }: PricingCardProps) => {
               loadingText={<Loader2 className="h-4 w-4 animate-spin" />}
               fullWidth={true}
             >
-              Get Started
+              {getButtonText()}
             </PrimaryButton>
           </div>
         </div>

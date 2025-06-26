@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { PrimaryButton, SecondaryButton } from "@/components/styles/buttons"
 import { useCTA } from "./useCTA"
+import { COMPANY } from "@/lib/socials"
 
 export const CTA = () => {
   const { fadeInUp } = useCTA()
@@ -32,7 +33,7 @@ export const CTA = () => {
             </PrimaryButton>
             <SecondaryButton
               size="lg"
-              onClick={() => window.open("https://infideli.vercel.app/", "_blank")}
+              onClick={() => window.open(COMPANY.demoUrl, "_blank")}
             >
               View Live Demo
             </SecondaryButton>

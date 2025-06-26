@@ -19,6 +19,13 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
   const { products, isLoading: productsLoading, getProductByName, getProductPrice } = usePolarProducts()
   const listenerAttached = useRef(false)
 
+  const getButtonText = () => {
+    if (planName === "Launch Ready") {
+      return "Start Launch Ready"
+    }
+    return "Request Custom Pro"
+  }
+
   useEffect(() => {
     if (listenerAttached.current) return;
 
@@ -96,6 +103,7 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
 
   return { 
     handleGetStarted, 
-    isLoading: isLoading || productsLoading 
+    isLoading: isLoading || productsLoading,
+    getButtonText
   }
 } 

@@ -2,12 +2,19 @@ import { useAnimations } from "@/hooks/useAnimations"
 import { useState } from "react"
 
 export const useHero = () => {
-  const { fadeInUp, floatingAnimation, floatingTransition } = useAnimations()
+  const { floatingAnimation, floatingTransition } = useAnimations()
   const [isIntroFinished, setIsIntroFinished] = useState(false)
 
   const handleIntroAnimationComplete = () => {
     setIsIntroFinished(true)
   }
+
+  const sequentialFadeIn = (delay: number) => ({
+    initial: { opacity: 0, y: 40 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 1.2, delay },
+    viewport: { once: true, amount: 0.5 }
+  })
 
   const mockupFloatingCards = [
     {
@@ -41,7 +48,7 @@ export const useHero = () => {
   ]
 
   return {
-    fadeInUp,
+    sequentialFadeIn,
     floatingAnimation,
     floatingTransition,
     mockupFloatingCards,

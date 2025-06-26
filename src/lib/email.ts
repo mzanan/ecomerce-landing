@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { COMPANY } from "./socials";
 
 interface ContactEmailData {
   name: string;
@@ -15,22 +16,16 @@ interface EmailConfig {
 
 export function validateEmailConfig(): EmailConfig {
   const apiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.RESEND_FROM_EMAIL;
-  const toEmail = process.env.RESEND_TO_EMAIL;
 
   if (!apiKey) {
     throw new Error('Missing RESEND_API_KEY environment variable');
   }
 
-  if (!fromEmail) {
-    throw new Error('Missing RESEND_FROM_EMAIL environment variable');
-  }
-
-  if (!toEmail) {
-    throw new Error('Missing RESEND_TO_EMAIL environment variable');
-  }
-
-  return { apiKey, fromEmail, toEmail };
+  return { 
+    apiKey, 
+    fromEmail: COMPANY.email.from, 
+    toEmail: COMPANY.email.noReply 
+  };
 }
 
 export function generateContactEmailTemplate(data: ContactEmailData): string {
@@ -67,7 +62,7 @@ export function generateContactEmailTemplate(data: ContactEmailData): string {
             </div>
           </div>
           <div style="background: #f8f9fa; padding: 20px; text-align: center; color: #666; border-radius: 0 0 8px 8px;">
-            <p style="margin: 0; font-size: 14px;">This email was sent from the GVT Devs contact form.</p>
+            <p style="margin: 0; font-size: 14px;">This email was sent from the ${COMPANY.name} contact form.</p>
           </div>
         </div>
       </body>
@@ -76,13 +71,6 @@ export function generateContactEmailTemplate(data: ContactEmailData): string {
 }
 
 export async function sendContactEmail(data: ContactEmailData, config: EmailConfig) {
-  console.log('🔧 Email config:', {
-    fromEmail: config.fromEmail,
-    toEmail: config.toEmail,
-    apiKeyExists: !!config.apiKey,
-    apiKeyPrefix: config.apiKey.substring(0, 8) + '...'
-  });
-
   const resend = new Resend(config.apiKey);
   
   const emailPayload = {
@@ -92,14 +80,6 @@ export async function sendContactEmail(data: ContactEmailData, config: EmailConf
     subject: `Contact Form: ${data.subject}`,
     html: generateContactEmailTemplate(data),
   };
-
-  console.log('📧 Sending email with payload:', {
-    from: emailPayload.from,
-    to: emailPayload.to,
-    replyTo: emailPayload.replyTo,
-    subject: emailPayload.subject,
-    htmlLength: emailPayload.html.length
-  });
 
   const { data: emailData, error } = await resend.emails.send(emailPayload);
 

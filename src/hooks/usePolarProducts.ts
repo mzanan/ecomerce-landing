@@ -18,7 +18,6 @@ export const usePolarProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        console.log('🔍 Fetching products from API...');
         setIsLoading(true);
         setError(null);
         
@@ -29,7 +28,6 @@ export const usePolarProducts = () => {
           throw new Error(data.error || 'Failed to fetch products');
         }
         
-        console.log('✅ Products loaded:', data.products.length);
         setProducts(data.products || []);
         
       } catch (error) {

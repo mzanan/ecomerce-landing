@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { PrimaryButton, LinkButton } from "@/components/styles/buttons"
 import { useHeader } from "./useHeader"
+import { COMPANY } from "@/lib/socials"
 
 export const Header = () => {
   const { navigationItems } = useHeader()
@@ -24,7 +25,12 @@ export const Header = () => {
             variant="brand"
             onClick={() => window.location.href = "/"}
           >
-            GVT Devs
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-sm">G</span>
+              </div>
+              <span className="text-xl font-bold text-black">{COMPANY.name}</span>
+            </div>
           </LinkButton>
           <nav className="hidden lg:flex items-center space-x-8">
             {navigationItems.map((item, index) => (

@@ -75,35 +75,13 @@ export const useContact = () => {
     },
   }
 
-  const contactInfo = [
-    {
-      icon: "📧",
-      title: "Email",
-      description: "Send us an email",
-      value: "hello@gvtdevs.com",
-    },
-    {
-      icon: "💬",
-      title: "Chat",
-      description: "Chat with our team",
-      value: "Start a conversation",
-    },
-    {
-      icon: "📍",
-      title: "Office",
-      description: "Visit our office",
-      value: "San Francisco, CA",
-    },
-  ]
-
   return {
     fadeInUp,
     formData,
     isSubmitting,
     isSubmitted,
-    handleInputChange,
-    handleSubmit,
     formVariants,
-    contactInfo,
+    handleInputChange,
+    handleSubmit
   }
 } 

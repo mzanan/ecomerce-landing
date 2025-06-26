@@ -2,12 +2,13 @@
 
 import { Header } from "@/components/Header/Header"
 import { Hero } from "@/components/Hero/Hero"
-import { Features } from "@/components/Features/Features"
+import { HeroSlideshow } from "@/components/HeroSlideshow/HeroSlideshow"
 import { Pricing } from "@/components/Pricing/Pricing"
+import { FAQ } from "@/components/FAQ/FAQ"
 import { Demo } from "@/components/Demo/Demo"
 import { Contact } from "@/components/Contact/Contact"
 import { CTA } from "@/components/CTA/CTA"
-
+import { Footer } from "@/components/Footer/Footer"
 
 export default function EcommerceSaaSLanding() {
   return (
@@ -17,12 +18,15 @@ export default function EcommerceSaaSLanding() {
       
       <div className="snap-y snap-proximity overflow-y-auto">
         <Hero />
-        <Features />
+        <HeroSlideshow />
         <Pricing />
         <Demo />
+        <FAQ />
         <Contact />
         <CTA />
       </div>
+      
+      <Footer />
     </div>
   )
 }
