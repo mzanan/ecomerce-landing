@@ -26,8 +26,8 @@ export const Demo = () => {
   }, [openedMedia])
 
   return (
-    <>
-      <section id="demo" className="relative snap-start py-20 overflow-hidden">
+    <div className="snap-start min-h-screen py-20">
+      <section id="demo" className="h-full flex items-center">
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="text-center space-y-6 mb-16"
@@ -187,6 +187,6 @@ export const Demo = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   )
 } 

@@ -20,7 +20,7 @@ export const HeroSlideshow = () => {
   } = useHeroSlideshow()
 
   return (
-    <section id="slideshow" className="h-screen flex items-center py-20">
+    <section id="slideshow" className="snap-start h-screen flex items-center py-20">
       <div className="flex flex-col gap-4 max-w-6xl w-full h-full mx-auto justify-center">
         {/* View Toggle */}
         <div className="flex items-center justify-center">

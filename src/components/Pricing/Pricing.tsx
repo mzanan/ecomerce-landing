@@ -8,7 +8,7 @@ export const Pricing = () => {
   const { pricingPlans } = usePricing()
 
   return (
-    <section id="pricing" className="relative snap-start py-20 overflow-hidden">
+    <section id="pricing" className="snap-start h-screen flex items-center py-20">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="text-center space-y-6 mb-16"

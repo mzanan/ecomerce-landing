@@ -37,7 +37,7 @@ export const PricingCard = ({ plan, productKey }: PricingCardProps) => {
         </div>
       )}
       <Card className="p-8 h-full flex flex-col hover:scale-105 transition-all duration-300 
-              backdrop-blur-sm border border-gray-200/50 bg-white/10 shadow-lg rounded-xl">
+              backdrop-blur-sm border border-gray-200/50 bg-white/50 shadow-lg rounded-xl">
         <div className="space-y-6 flex-1 flex flex-col">
           <div className="space-y-2">
             <h3 className="text-2xl font-bold text-black text-center">
