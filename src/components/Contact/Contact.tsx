@@ -21,7 +21,7 @@ export const Contact = () => {
   } = useContact()
 
   return (
-    <section id="contact" className="snap-start h-screen flex items-center py-20">
+    <section id="contact" className="snap-start h-screen flex items-center ">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           className="text-center space-y-6 mb-16"

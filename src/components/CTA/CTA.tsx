@@ -10,7 +10,7 @@ export const CTA = () => {
   const { fadeInUp } = useCTA()
 
   return (
-    <section className="snap-start h-screen flex items-center py-20">
+    <section className="snap-start h-screen flex items-center ">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div className="text-center space-y-8 max-w-4xl mx-auto" {...fadeInUp}>
           <h2 className="text-4xl lg:text-6xl font-bold text-black">

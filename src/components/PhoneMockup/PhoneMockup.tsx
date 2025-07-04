@@ -9,22 +9,22 @@ interface PhoneMockupProps {
   className?: string
   animate?: boolean
   floatingAnimation?: TargetAndTransition
-  floatingTransition?: (duration: number) => Transition
   isIntroFinished?: boolean
   width?: string
   height?: string
+  floatingTransition?: (duration: number) => Transition
   setVideoRef?: (element: HTMLVideoElement | null) => void
 }
 
 export const PhoneMockup = ({ 
   videoSrc, 
   children, 
-  className = "", 
+  className, 
   animate = true,
   floatingAnimation,
   isIntroFinished = false,
-  width = "w-[280px]",
-  height = "h-[580px]",
+  width = "w-[260px]",
+  height = "h-[520px]",
   floatingTransition,
   setVideoRef
 }: PhoneMockupProps) => {
@@ -40,11 +40,11 @@ export const PhoneMockup = ({
         <video
           ref={setVideoRef}
           src={videoSrc}
-          className="w-full h-full object-cover"
           loop
           muted
           playsInline
           autoPlay
+          className="!max-w-[101%]"
         />
       ) : (
         children || (

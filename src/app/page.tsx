@@ -16,7 +16,7 @@ export default function EcommerceSaaSLanding() {
       <div className="fixed inset-0 opacity-10 pointer-events-none bg-grid-pattern" />
       <Header />
       
-      <div className="snap-y snap-proximity overflow-y-auto">
+      <div className="flex flex-col gap-20 snap-y snap-mandatory overflow-y-auto overflow-x-hidden">
         <Hero />
         <HeroSlideshow />
         <Pricing />

@@ -8,7 +8,7 @@ export const FAQ = () => {
   const { faqs, fadeInUp, cardVariants } = useFAQ()
 
   return (
-    <section id="faq" className="snap-start h-screen flex items-center py-20">
+    <section id="faq" className="snap-start h-screen flex items-center ">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div className="text-center space-y-6 mb-16" {...fadeInUp}>
           <h2 className="text-4xl lg:text-6xl font-bold text-black">

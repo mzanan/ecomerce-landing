@@ -30,6 +30,16 @@ export const useHeroSlideshow = () => {
   const [playingStates, setPlayingStates] = useState<{ [key: string]: boolean }>(initialPlayingStates)
   const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({})
 
+  useEffect(() => {
+    const checkMobile = () => {
+      if (window.innerWidth < 768) {
+        setActiveView("mobile")
+      }
+    }
+    
+    checkMobile()
+  }, [])
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true,
     dragFree: false 
@@ -68,7 +78,6 @@ export const useHeroSlideshow = () => {
     }
   }, [emblaApi, slidePairs.length])
 
-  // Sincronizar currentSlide con Embla
   useEffect(() => {
     if (!emblaApi) return
 
@@ -77,7 +86,7 @@ export const useHeroSlideshow = () => {
     }
 
     emblaApi.on('select', onSelect)
-    onSelect() // Set inicial
+    onSelect() 
 
     return () => {
       emblaApi.off('select', onSelect)

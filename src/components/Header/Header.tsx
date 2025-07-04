@@ -20,7 +20,7 @@ export const Header = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent pointer-events-none"></div>
 
-        <div className="relative px-6 flex items-center justify-between h-16">
+        <div className="relative px-2 md:px-6 flex items-center justify-between h-12 md:h-16">
           <LinkButton 
             variant="brand"
             onClick={() => window.location.href = "/"}
@@ -29,7 +29,7 @@ export const Header = () => {
               <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-sm">G</span>
               </div>
-              <span className="text-xl font-bold text-black">{COMPANY.name}</span>
+              <span className="text-base md:text-xl font-bold text-black">{COMPANY.name}</span>
             </div>
           </LinkButton>
           <nav className="hidden lg:flex items-center space-x-8">

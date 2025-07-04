@@ -20,11 +20,11 @@ export const HeroSlideshow = () => {
   } = useHeroSlideshow()
 
   return (
-    <section id="slideshow" className="snap-start h-screen flex items-center py-20">
+    <section id="features" className="md:container relative snap-start min-h-screen flex items-center justify-center">
       <div className="flex flex-col gap-4 max-w-6xl w-full h-full mx-auto justify-center">
         {/* View Toggle */}
         <div className="flex items-center justify-center">
-          <div className="flex bg-slate-100 rounded-full p-1 relative">
+          <div className="flex flex-row-reverse md:flex-row bg-slate-100 rounded-full p-1 relative">
             <motion.div
               className="absolute inset-y-1 bg-white rounded-full shadow-sm"
               initial={false}
@@ -67,20 +67,22 @@ export const HeroSlideshow = () => {
                         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                         exit={{ opacity: 0, scale: 0.9, rotateY: 15 }}
                         transition={{ duration: 0.6 }}
-                        className="relative group cursor-pointer h-full"
+                        className="relative group cursor-pointer h-full rounded-2xl"
                         onClick={() => toggleVideoPlayback(`desktop-${idx}`)}
                       >
                         
                         {/* Desktop Frame */}
-                        <video
-                          ref={(el) => setVideoRef(`desktop-${idx}`, el)}
-                          src={pair.desktop}
-                          className="w-full h-full object-cover rounded-2xl"
-                          loop
-                          muted
-                          playsInline
-                          autoPlay
-                        />
+                        <div className="px-4 md:mx-auto">
+                          <video
+                            ref={(el) => setVideoRef(`desktop-${idx}`, el)}
+                            src={pair.desktop}
+                            className="w-full h-full object-cover rounded-2xl"
+                            loop
+                            muted
+                            playsInline
+                            autoPlay
+                          />
+                          </div>
                       </motion.div>
                     ) : (
                       <motion.div
@@ -99,8 +101,8 @@ export const HeroSlideshow = () => {
                               videoSrc={pair.mobile} 
                               animate={false} 
                               setVideoRef={(el) => setVideoRef(`mobile-${idx}`, el)} 
-                              height="h-full"
-                              width="w-[360px]"
+                              width = "max-w-[280px] md:max-w-[340px] w-full"
+                              height = "h-full"
                             />
                           </div>
                         </div>

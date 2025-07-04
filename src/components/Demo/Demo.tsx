@@ -26,7 +26,7 @@ export const Demo = () => {
   }, [openedMedia])
 
   return (
-    <div className="snap-start min-h-screen py-20">
+    <div className="snap-start min-h-screen ">
       <section id="demo" className="h-full flex items-center">
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -109,7 +109,7 @@ export const Demo = () => {
                     <Card className="p-8 h-full bg-white/50 backdrop-blur-sm border-white/30 hover:bg-white/70 transition-all duration-300">
                       <div className="space-y-4 h-full flex flex-col">
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-full bg-black/10 flex items-center justify-center">
+                          <div className="w-12 h-12 rounded-full bg-yellow-300/10 flex items-center justify-center">
                             <span className="text-2xl">{feature.icon}</span>
                           </div>
                           <h3 className="text-2xl font-bold text-black">
