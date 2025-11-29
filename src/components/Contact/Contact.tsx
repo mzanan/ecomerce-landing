@@ -21,21 +21,21 @@ export const Contact = () => {
   } = useContact()
 
   return (
-    <section id="contact" className="snap-start h-screen flex items-center ">
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="contact" className="section-layout">
+      <div className="section-container">
         <motion.div
-          className="text-center space-y-6 mb-16"
+          className="section-header"
           {...fadeInUp}
         >
-          <h2 className="text-4xl lg:text-6xl font-bold text-black">
+          <h2 className="main-heading">
             Get in touch
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="sub-heading">
             Have a question or want to work together? We&apos;d love to hear from you.
           </p>
         </motion.div>
 
-        <div className="mt-12 max-w-6xl mx-auto">
+        <div className="mt-12 max-w-3xl mx-auto">
           {/* Contact Form */}
           <motion.div
             variants={formVariants}
@@ -43,7 +43,7 @@ export const Contact = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <Card className="p-8 h-full backdrop-blur-sm border border-gray-200/50 bg-white/10 shadow-lg rounded-xl">
+            <Card className="p-8 h-full card-glass">
               <form onSubmit={handleSubmit} className="h-full flex flex-col gap-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -132,15 +132,15 @@ export const Contact = () => {
         </div>
 
         <motion.div
-          className="mt-12 max-w-6xl mx-auto"
+          className="mt-12 max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.8 }}
           viewport={{ once: true }}
         >
-          <Card className="p-6 backdrop-blur-sm border border-gray-200/50 bg-white/10 shadow-lg rounded-xl">
+          <Card className="p-6 card-glass">
             <div className="text-center space-y-4">
-              <h3 className="text-xl font-bold text-black">
+              <h3 className="text-xl font-bold text-heading">
                 Quick Response
               </h3>
               <p className="text-gray-600">

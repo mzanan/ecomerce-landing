@@ -1,4 +1,4 @@
-export interface DemoFeature {
+export interface Feature {
   title: string
   description: string
   features: string[]

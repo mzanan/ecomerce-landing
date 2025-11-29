@@ -8,19 +8,19 @@ export const Pricing = () => {
   const { pricingPlans } = usePricing()
 
   return (
-    <section id="pricing" className="snap-start min-h-screen flex items-center ">
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="pricing" className="section-layout">
+      <div className="section-container">
         <motion.div 
-          className="text-center space-y-6 mb-16"
+          className="section-header"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0 }}
           viewport={{ once: true, amount: 0.5 }}
         >
-          <h2 className="text-4xl lg:text-6xl font-bold text-black">
+          <h2 className="main-heading">
             Choose your plan
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="sub-heading">
             Different plans for different needs.
           </p>
           <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-4 max-w-2xl mx-auto mt-6">

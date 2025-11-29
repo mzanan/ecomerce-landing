@@ -3,4 +3,4 @@ export interface AnimationVariant {
   whileInView: { opacity: number; y?: number; x?: number }
   transition: { duration: number }
   viewport: { once: boolean }
-} 
+}

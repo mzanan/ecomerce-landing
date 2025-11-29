@@ -35,26 +35,26 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
       toast.error('No products available')
       return
     }
-
-    const productName = PRODUCT_NAMES[productKey]
+      
+      const productName = PRODUCT_NAMES[productKey]
     const product = products.find(p => p.name === productName)
-
-    if (!product) {
+      
+      if (!product) {
       console.error('Product not found for:', productKey, 'Expected name:', productName, 'Available products:', products.map(p => p.name))
-      toast.error('Product not found')
-      return
-    }
+        toast.error('Product not found')
+        return
+      }
 
     const price = product.prices?.[0]
-
+      
     if (!price) {
-      toast.error('Price not found')
-      return
-    }
+        toast.error('Price not found')
+        return
+      }
 
     await createCheckout({
       amount: price.priceAmount,
-      metadata: {
+        metadata: {
         plan: planName,
         productKey,
         productId: product.id,
@@ -63,8 +63,8 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
     })
   }, [productKey, planName, products, productsLoading, createCheckout])
 
-  return {
-    handleGetStarted,
+  return { 
+    handleGetStarted, 
     isLoading: productsLoading || checkoutLoading,
     getButtonText
   }

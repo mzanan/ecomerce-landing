@@ -7,7 +7,7 @@ import { useHeader } from "./useHeader"
 import { COMPANY } from "@/lib/socials"
 
 export const Header = () => {
-  const { navigationItems } = useHeader()
+  const { navigationItems, scrollToSection, activeSection } = useHeader()
 
   return (
     <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-4">
@@ -38,26 +38,16 @@ export const Header = () => {
               <LinkButton
                 key={`${item.href}-${index}`}
                 variant="nav"
-                onClick={() => {
-                  const sectionId = item.href.replace('#', '')
-                  document.getElementById(sectionId)?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                  })
-                }}
+                active={activeSection === item.href}
+                onClick={() => scrollToSection(item.href)}
               >
                 {item.label}
               </LinkButton>
             ))}
           </nav>
           <div className="flex items-center">
-            <PrimaryButton 
-              onClick={() => {
-                document.getElementById('pricing')?.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'start'
-                })
-              }}
+            <PrimaryButton
+              onClick={() => scrollToSection("#pricing")}
             >
               Start Your Store Today
             </PrimaryButton>

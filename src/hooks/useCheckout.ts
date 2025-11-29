@@ -28,13 +28,13 @@ export function useCheckout() {
           metadata: options.metadata,
         }),
       });
-
+      
       if (!response.ok) {
         throw new Error("Failed to create checkout session");
       }
 
       const data = await response.json();
-
+      
       if (data.url) {
         window.location.href = data.url;
       } else {

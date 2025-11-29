@@ -57,8 +57,8 @@ export const Hero = () => {
   } = useHero()
 
   return (
-    <section className="relative snap-start min-h-screen flex md:items-center bg-gradient-to-b from-red-50 to-transparent pt-22 md:pt-4">
-      <div className="container mx-auto px-4 relative z-10">
+    <section className="section-layout relative bg-hero-gradient md:pt-4 md:items-center">
+      <div className="section-container">
         <div className="flex flex-col gap-6 md:gap-12 items-center text-center">
           <div>
             <div className="md:space-y-4 max-w-4xl md:pb-6">

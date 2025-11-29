@@ -201,6 +201,43 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Custom utility classes for repeated patterns */
+  .section-container {
+    @apply container mx-auto px-4 relative z-10;
+  }
+
+  .section-header {
+    @apply text-center space-y-6 mb-16;
+  }
+
+  .main-heading {
+    @apply text-4xl lg:text-6xl font-bold text-black;
+  }
+
+  .sub-heading {
+    @apply text-xl text-gray-600 max-w-3xl mx-auto;
+  }
+
+  .section-layout {
+    @apply snap-start min-h-dvh flex items-center pt-20;
+  }
+
+  .card-glass {
+    @apply backdrop-blur-sm border border-gray-200/50 bg-white/10 shadow-lg rounded-xl;
+  }
+
+  .text-heading {
+    @apply text-black;
+  }
+
+  .bg-main-gradient {
+    @apply bg-gradient-to-br from-gray-50 via-amber-50 to-pink-300;
+  }
+
+  .bg-hero-gradient {
+    @apply bg-gradient-to-b from-red-50 to-transparent;
+  }
 }
 
 .bg-grid-pattern {

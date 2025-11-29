@@ -8,10 +8,10 @@ export const FAQ = () => {
   const { faqs, fadeInUp, cardVariants } = useFAQ()
 
   return (
-    <section id="faq" className="snap-start h-screen flex items-center ">
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div className="text-center space-y-6 mb-16" {...fadeInUp}>
-          <h2 className="text-4xl lg:text-6xl font-bold text-black">
+    <section id="faq" className="section-layout">
+      <div className="section-container">
+        <motion.div className="section-header" {...fadeInUp}>
+          <h2 className="main-heading">
             Frequently Asked Questions
           </h2>
         </motion.div>
@@ -26,9 +26,9 @@ export const FAQ = () => {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="p-6 backdrop-blur-sm border border-gray-200/50 bg-white/10 shadow-lg rounded-xl">
+              <Card className="p-6 card-glass">
                 <div className="space-y-3">
-                  <h3 className="text-lg font-bold text-black">
+                  <h3 className="text-lg font-bold text-heading">
                     {faq.question}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">

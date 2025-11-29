@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const body = await request.text();
+  const body = await request.text();
     const headersList = Object.fromEntries(request.headers.entries());
 
     const response = await fetch(webhookEndpoint, {
@@ -25,11 +25,11 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       throw new Error(`Webhook forward failed: ${response.status}`);
-    }
+  }
 
     return NextResponse.json({ forwarded: true });
   } catch (error) {
     console.error("Webhook forward error:", error);
     return NextResponse.json({ error: "Forward failed" }, { status: 500 });
   }
-}
+} 

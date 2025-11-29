@@ -21,18 +21,18 @@ export async function GET() {
         priceCurrency: (product.default_price as Stripe.Price).currency
       }] : []
     }));
-
+    
     return NextResponse.json({
       success: true,
       products: formattedProducts
     });
-
+    
   } catch (error) {
     console.error('❌ Error fetching products:', error);
-
+    
     return NextResponse.json({
       success: false,
       error: 'Failed to fetch products'
     }, { status: 500 });
   }
-}
+} 

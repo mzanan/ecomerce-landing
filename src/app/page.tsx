@@ -2,31 +2,26 @@
 
 import { Header } from "@/components/Header/Header"
 import { Hero } from "@/components/Hero/Hero"
-import { HeroSlideshow } from "@/components/HeroSlideshow/HeroSlideshow"
+import { Demo } from "@/components/Demo/Demo"
 import { Pricing } from "@/components/Pricing/Pricing"
 import { FAQ } from "@/components/FAQ/FAQ"
-import { Demo } from "@/components/Demo/Demo"
+import { Features } from "@/components/Features/Features"
 import { Contact } from "@/components/Contact/Contact"
-import { CTA } from "@/components/CTA/CTA"
-import { Footer } from "@/components/Footer/Footer"
 
-export default function EcommerceSaaSLanding() {
+export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-amber-50 to-pink-300">
+    <div className="h-dvh bg-main-gradient overflow-y-scroll snap-y snap-mandatory overflow-x-hidden">
       <div className="fixed inset-0 opacity-10 pointer-events-none bg-grid-pattern" />
       <Header />
       
-      <div className="flex flex-col gap-20 snap-y snap-mandatory overflow-y-auto overflow-x-hidden">
+      <div className="flex flex-col gap-20">
         <Hero />
-        <HeroSlideshow />
-        <Pricing />
         <Demo />
-        <FAQ />
+        <Features />
+        <Pricing />
         <Contact />
-        <CTA />
+        <FAQ />
       </div>
-      
-      <Footer />
     </div>
   )
 }
