@@ -13,9 +13,48 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+if (!appUrl) {
+  throw new Error('NEXT_PUBLIC_APP_URL environment variable is required');
+}
+
 export const metadata: Metadata = {
-  title: "Ecommerce Landing Page",
-  description: "Ecommerce Landing Page",
+  metadataBase: new URL(appUrl),
+  title: {
+    default: "MZ Dev - Ecommerce Solutions",
+    template: "MZ Dev - %s",
+  },
+  description: "Professional ecommerce landing pages and solutions. Build your online store with modern design and secure payments.",
+  keywords: "ecommerce, landing page, online store, web development, payments",
+  authors: [{ name: "Matias Zanan" }],
+  creator: "Matias Zanan",
+  publisher: "Matias Zanan",
+  robots: "index, follow",
+  openGraph: {
+    type: "website",
+    siteName: "Matias Zanan",
+    title: "Matias Zanan - Ecommerce Solutions",
+    description: "Professional ecommerce landing pages and solutions. Build your online store with modern design and secure payments.",
+      images: [
+        {
+          url: "/og-default.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Matias Zanan - Ecommerce Solutions",
+        },
+      ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Matias Zanan - Ecommerce Solutions",
+    description: "Professional ecommerce landing pages and solutions.",
+    images: ["/og-default.jpg"],
+  },
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

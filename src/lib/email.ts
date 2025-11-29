@@ -1,4 +1,4 @@
-import { Resend } from "resend";
+import nodemailer from 'nodemailer';
 import { COMPANY } from "./socials";
 
 interface ContactEmailData {
@@ -9,34 +9,50 @@ interface ContactEmailData {
 }
 
 interface EmailConfig {
-  apiKey: string;
+  host: string;
+  port: number;
+  secure: boolean;
+  auth: {
+    user: string;
+    pass: string;
+  };
   fromEmail: string;
   toEmail: string;
 }
 
 export function validateEmailConfig(): EmailConfig {
-  const apiKey = process.env.RESEND_API_KEY;
+  const host = process.env.SMTP_HOST;
+  const port = parseInt(process.env.SMTP_PORT || '465');
+  const username = process.env.SMTP_USERNAME;
+  const password = process.env.SMTP_PASSWORD;
+  const fromEmail = process.env.SMTP_FROM_EMAIL;
 
-  if (!apiKey) {
-    throw new Error('Missing RESEND_API_KEY environment variable');
+  if (!host || !port || !username || !password || !fromEmail) {
+    throw new Error('Missing SMTP environment variables');
   }
 
-  return { 
-    apiKey, 
-    fromEmail: COMPANY.email.from, 
-    toEmail: COMPANY.email.noReply 
+  return {
+    host,
+    port,
+    secure: port === 465,
+    auth: {
+      user: username,
+      pass: password,
+    },
+    fromEmail,
+    toEmail: COMPANY.email.noReply || fromEmail,
   };
 }
 
 export function generateContactEmailTemplate(data: ContactEmailData): string {
   const { name, email, subject, message } = data;
-  
+
   return `
     <!DOCTYPE html>
     <html>
       <head>
         <meta charset="utf-8">
-        <title>New Contact Form Submission</title>
+        <title>Email from Ecommerce Landing/title>
       </head>
       <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px;">
         <div style="max-width: 600px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
@@ -71,31 +87,27 @@ export function generateContactEmailTemplate(data: ContactEmailData): string {
 }
 
 export async function sendContactEmail(data: ContactEmailData, config: EmailConfig) {
-  const resend = new Resend(config.apiKey);
-  
-  const emailPayload = {
+  const transporter = nodemailer.createTransport({
+    host: config.host,
+    port: config.port,
+    secure: config.secure,
+    auth: config.auth,
+  });
+
+  const mailOptions = {
     from: config.fromEmail,
-    to: [config.toEmail],
+    to: config.toEmail,
     replyTo: data.email,
     subject: `Contact Form: ${data.subject}`,
     html: generateContactEmailTemplate(data),
   };
 
-  const { data: emailData, error } = await resend.emails.send(emailPayload);
-
-  if (error) {
-    console.error('❌ Resend error details:', {
-      error,
-      errorType: typeof error,
-      errorKeys: Object.keys(error),
-      errorMessage: error.message,
-      errorName: error.name,
-      fullError: JSON.stringify(error, null, 2)
-    });
-    
-    throw new Error(`Failed to send email: ${JSON.stringify(error)}`);
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('✅ Email sent successfully:', info.messageId);
+    return info;
+  } catch (error) {
+    console.error('❌ SMTP error details:', error);
+    throw new Error(`Failed to send email: ${error}`);
   }
-
-  console.log('✅ Email sent successfully:', emailData);
-  return emailData;
 } 

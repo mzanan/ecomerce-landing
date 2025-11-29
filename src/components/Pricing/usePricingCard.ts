@@ -1,6 +1,6 @@
-import { useState, useCallback, useEffect, useRef } from "react"
-import { usePolarEmbedded } from "@/hooks/usePolarEmbedded"
-import { usePolarProducts } from "@/hooks/usePolarProducts"
+import { useCallback } from "react"
+import { useProducts } from "@/hooks/useProducts"
+import { useCheckout } from "@/hooks/useCheckout"
 import { toast } from "sonner"
 
 interface UsePricingCardProps {
@@ -14,10 +14,8 @@ const PRODUCT_NAMES = {
 } as const;
 
 export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const { openCheckout } = usePolarEmbedded()
-  const { products, isLoading: productsLoading, getProductByName, getProductPrice } = usePolarProducts()
-  const listenerAttached = useRef(false)
+  const { products, isLoading: productsLoading } = useProducts()
+  const { createCheckout, isLoading: checkoutLoading } = useCheckout()
 
   const getButtonText = () => {
     if (planName === "Launch Ready") {
@@ -26,28 +24,6 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
     return "Request Custom Pro"
   }
 
-  useEffect(() => {
-    if (listenerAttached.current) return;
-
-    const handleCheckoutClose = () => {
-      setIsLoading(false)
-    }
-
-    const handleCheckoutSuccess = () => {
-      setIsLoading(false)
-    }
-
-    window.addEventListener('polar-checkout-closed', handleCheckoutClose, { passive: true })
-    window.addEventListener('polar-checkout-success', handleCheckoutSuccess, { passive: true })
-    
-    listenerAttached.current = true;
-
-    return () => {
-      window.removeEventListener('polar-checkout-closed', handleCheckoutClose)
-      window.removeEventListener('polar-checkout-success', handleCheckoutSuccess)
-      listenerAttached.current = false;
-    }
-  }, [])
 
   const handleGetStarted = useCallback(async () => {
     if (productsLoading) {
@@ -60,50 +36,36 @@ export const usePricingCard = ({ productKey, planName }: UsePricingCardProps) =>
       return
     }
 
-    try {
-      setIsLoading(true)
-      
-      const productName = PRODUCT_NAMES[productKey]
-      const product = getProductByName(productName)
-      
-      if (!product) {
-        console.error('❌ Product not found for:', productKey, 'with name:', productName);
-        console.log('📋 Available products:', products.map(p => p.name));
-        toast.error('Product not found')
-        setIsLoading(false)
-        return
-      }
+    const productName = PRODUCT_NAMES[productKey]
+    const product = products.find(p => p.name === productName)
 
-      const priceId = getProductPrice(product)
-      
-      if (!priceId) {
-        console.error('❌ Price not found for product:', product);
-        toast.error('Price not found')
-        setIsLoading(false)
-        return
-      }
-
-      console.log('🚀 Opening checkout for:', productName, 'with price:', priceId);
-
-      await openCheckout({
-        priceId,
-        metadata: {
-          plan: planName
-        }
-      })
-      
-      setIsLoading(false)
-      
-    } catch (error) {
-      console.error('❌ Error during checkout:', error)
-      toast.error('Failed to open checkout')
-      setIsLoading(false)
+    if (!product) {
+      console.error('Product not found for:', productKey, 'Expected name:', productName, 'Available products:', products.map(p => p.name))
+      toast.error('Product not found')
+      return
     }
-  }, [productKey, planName, openCheckout, getProductByName, getProductPrice, productsLoading, products])
 
-  return { 
-    handleGetStarted, 
-    isLoading: isLoading || productsLoading,
+    const price = product.prices?.[0]
+
+    if (!price) {
+      toast.error('Price not found')
+      return
+    }
+
+    await createCheckout({
+      amount: price.priceAmount,
+      metadata: {
+        plan: planName,
+        productKey,
+        productId: product.id,
+        priceId: price.id
+      }
+    })
+  }, [productKey, planName, products, productsLoading, createCheckout])
+
+  return {
+    handleGetStarted,
+    isLoading: productsLoading || checkoutLoading,
     getButtonText
   }
 } 

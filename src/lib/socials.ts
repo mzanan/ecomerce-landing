@@ -1,8 +1,8 @@
 export const COMPANY = {
-  name: "GVT Devs",
+  name: "Matias Zanan",
   demoUrl: "https://ecommerce-landing-kappa.vercel.app/",
   email: {
-    from: "GVT Devs <no-reply@resend.dev>",
-    noReply: "no-reply@resend.dev"
+    from: "Matias Zanan <matiaszanan@gmail.com>",
+    noReply: "matiaszanan@gmail.com"
   }
 } 
