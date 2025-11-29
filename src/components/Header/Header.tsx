@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { PrimaryButton, LinkButton } from "@/components/styles/buttons"
 import { useHeader } from "./useHeader"
 import { COMPANY } from "@/lib/socials"
@@ -26,8 +27,8 @@ export const Header = () => {
             onClick={() => window.location.href = "/"}
           >
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">G</span>
+              <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center overflow-hidden">
+                <Image src="/icon.svg" alt="MZ Dev Logo" width={24} height={24} className="w-6 h-6" />
               </div>
               <span className="text-base md:text-xl font-bold text-black">{COMPANY.name}</span>
             </div>

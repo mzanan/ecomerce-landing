@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      messageId: emailData?.id,
+      messageId: emailData?.messageId,
     });
 
   } catch (error) {
