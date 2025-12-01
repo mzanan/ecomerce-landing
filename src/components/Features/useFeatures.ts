@@ -72,11 +72,11 @@ export const useFeatures = () => {
     {
       title: "Immersive Product View",
       description:
-        'Bring collections to life with layered carousels. Showcase each collection with large visuals and smooth image carousels. Individual items feature their own sliders, size/quantity selectors, and instant Add to Cart. Dual-carousel design enhances storytelling while keeping shopping intuitive.',
+        'Bring collections to life with layered carousels. The product screen showcases each collection with a large, captivating visual and a smooth image carousel. On the side, individual items from the set are presented, each with its own image slider, size and quantity selectors, and instant "Add to Cart" functionality. This dual-carousel layout enhances storytelling while keeping shopping intuitive and fast.',
       features: [
         "Full-screen set view with carousel",
-        "Independent item carousels",
-        "Seamless add-to-cart",
+        "Independent carousels for each item",
+        "Seamless add-to-cart interaction",
       ],
       icon: "🛍️",
       media: "/images/3.png",
