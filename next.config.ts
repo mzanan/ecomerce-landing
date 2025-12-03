@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/videos/:path*',
+        source: '/videos/demos/:path*',
         headers: [
           {
             key: 'Cache-Control',

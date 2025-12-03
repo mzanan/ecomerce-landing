@@ -6,16 +6,20 @@ import useEmblaCarousel from "embla-carousel-react"
 export const useDemo = () => {
   const slidePairs = [
     {
-      desktop: "/videos/1-desktop.mp4",
-      mobile: "/videos/1-mobile.mp4"
+      desktop: "/videos/demos/desktop/1.mp4",
+      mobile: "/videos/demos/mobile/1.mp4"
     },
     {
-      desktop: "/videos/2-desktop.mp4", 
-      mobile: "/videos/2-mobile.mp4"
+      desktop: "/videos/demos/desktop/2.mp4", 
+      mobile: "/videos/demos/mobile/2.mp4"
     },
     {
-      desktop: "/videos/3-desktop.mp4",
-      mobile: "/videos/3-mobile.mp4"
+      desktop: "/videos/demos/desktop/3.mp4",
+      mobile: "/videos/demos/mobile/3.mp4"
+    },
+    {
+      desktop: "/videos/demos/desktop/4.mp4",
+      mobile: "/videos/demos/mobile/4.mp4"
     }
   ]
 
@@ -60,6 +64,9 @@ export const useDemo = () => {
 
   const setVideoRef = useCallback((videoKey: string, element: HTMLVideoElement | null) => {
     videoRefs.current[videoKey] = element
+    if (element) {
+      element.playbackRate = 1.5
+    }
   }, [])
 
   const nextSlide = useCallback(() => {

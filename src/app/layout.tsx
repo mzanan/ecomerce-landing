@@ -35,14 +35,14 @@ export const metadata: Metadata = {
     siteName: "Matias Zanan",
     title: "Matias Zanan - Ecommerce Solutions",
     description: "Professional ecommerce landing pages and solutions. Build your online store with modern design and secure payments.",
-      images: [
-        {
-          url: "/og-default.jpg",
-          width: 1200,
-          height: 630,
-          alt: "Matias Zanan - Ecommerce Solutions",
-        },
-      ],
+    images: [
+      {
+        url: "/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Matias Zanan - Ecommerce Solutions",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",

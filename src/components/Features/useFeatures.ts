@@ -44,6 +44,7 @@ export const useFeatures = () => {
 
   const features = useMemo<Feature[]>(() => [
     {
+      id: 0,
       title: "Interactive Landing Experience",
       description:
         "Let users choose their path from the very first second. A sleek diagonal divider reacts to mouse movement, creating an engaging, dynamic first impression. Upon selecting a side (White or Black), the divider rotates smoothly and triggers an automatic scroll to the relevant section, no manual navigation needed.",
@@ -53,10 +54,12 @@ export const useFeatures = () => {
         "Thematic selection with auto-scroll",
       ],
       icon: "🎯",
-      media: "/videos/1.mp4",
+      media: "/videos/demos/desktop/1.mp4",
+      mobileMedia: "/videos/demos/mobile/1.mp4",
       mediaType: "video",
     },
     {
+      id: 1,
       title: "Unique Product Layouts",
       description:
         "Showcase your collections with style. This e-commerce template features a variety of refined and creative layouts designed to highlight product sets like fashion collections. Each layout offers a distinct, editorial feel, blending elegance and originality to elevate the shopping experience.",
@@ -66,23 +69,42 @@ export const useFeatures = () => {
         "Perfect for lookbooks and curated drops",
       ],
       icon: "✨",
-      media: "/videos/2.mp4",
+      media: "/videos/demos/desktop/2.mp4",
+      mobileMedia: "/videos/demos/mobile/2.mp4",
       mediaType: "video",
     },
     {
+      id: 2,
       title: "Immersive Product View",
       description:
-        'Bring collections to life with layered carousels. The product screen showcases each collection with a large, captivating visual and a smooth image carousel. On the side, individual items from the set are presented, each with its own image slider, size and quantity selectors, and instant "Add to Cart" functionality. This dual-carousel layout enhances storytelling while keeping shopping intuitive and fast.',
+        'Bring collections to life with layered carousels. Each collection features a captivating main carousel, while individual items offer their own sliders with size/quantity selectors and instant add-to-cart functionality. This dual layout enhances storytelling while keeping shopping intuitive and fast.',
       features: [
         "Full-screen set view with carousel",
         "Independent carousels for each item",
         "Seamless add-to-cart interaction",
       ],
       icon: "🛍️",
-      media: "/images/3.png",
-      mediaType: "image",
+      media: "/videos/demos/desktop/3.mp4",
+      mobileMedia: "/videos/demos/mobile/3.mp4",
+      mediaType: "video",
     },
     {
+      id: 3,
+      title: "Cart and checkout flow",
+      description:
+        'The cart and checkout flow is designed to be smooth and intuitive. Users can add items to the cart, view the cart, and checkout with ease. The checkout flow is designed to be smooth and intuitive. Users can add items to the cart, view the cart, and checkout with ease.',
+      features: [
+        "Smooth and intuitive cart and checkout flow",
+        "Easy to use and navigate",
+        "Fast and secure checkout",
+      ],
+      icon: "🛍️",
+      media: "/videos/demos/desktop/4.mp4",
+      mobileMedia: "/videos/demos/mobile/4.mp4",
+      mediaType: "video",
+    },
+    {
+      id: 4,
       title: "Powerful Admin Dashboard",
       description:
         "Track and manage your store's sales in real time. The admin panel shows every order's status, payment, and shipping info at a glance, with the option to view full details directly in Stripe.",
@@ -93,9 +115,11 @@ export const useFeatures = () => {
       ],
       icon: "📊",
       media: "/images/4.png",
+      mobileMedia: "/images/4.png",
       mediaType: "image",
     },
     {
+      id: 5,
       title: "One-Click Stripe Sync",
       description:
         "Save time by syncing your products with Stripe in just one click. No need to recreate items manually; your product catalog stays connected and up to date automatically.",
@@ -106,9 +130,11 @@ export const useFeatures = () => {
       ],
       icon: "⚡",
       media: "/images/5.png",
+      mobileMedia: "/images/5.png",
       mediaType: "image",
     },
     {
+      id: 6,
       title: "Unique Set Layouts",
       description:
         "Break the mold of conventional storefronts. Choose from a range of modern, elegant layouts to showcase each set with a distinct visual style, so every collection feels fresh and unique.",
@@ -118,10 +144,12 @@ export const useFeatures = () => {
         "Sleek and modern design",
       ],
       icon: "🎨",
-      media: "/videos/6.mp4",
+      media: "/videos/demos/desktop/6.mp4",
+      mobileMedia: "/videos/demos/mobile/4.mp4",
       mediaType: "video",
     },
     {
+      id: 7,
       title: "Editable Homepage Banners",
       description:
         "Easily create and update homepage text banners to highlight offers, announcements, or promotions. Rearrange components with simple drag-and-drop; no developer needed.",
@@ -131,7 +159,8 @@ export const useFeatures = () => {
         "Full flexibility without touching code",
       ],
       icon: "🏷️",
-      media: "/videos/7.mp4",
+      media: "/videos/demos/desktop/7.mp4",
+      mobileMedia: "/videos/demos/mobile/4.mp4",
       mediaType: "video",
     },
   ], [])

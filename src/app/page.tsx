@@ -13,7 +13,7 @@ export default function Home() {
     <div className="h-dvh bg-main-gradient overflow-y-scroll snap-y snap-mandatory overflow-x-hidden">
       <div className="fixed inset-0 opacity-10 pointer-events-none bg-grid-pattern" />
       <Header />
-      
+
       <div className="flex flex-col gap-20">
         <Hero />
         <Demo />
