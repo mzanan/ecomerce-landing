@@ -11,8 +11,8 @@ export const PhoneMockup = ({
   animate = true,
   floatingAnimation,
   isIntroFinished = false,
-  width = "w-[260px]",
-  height = "h-[520px]",
+  width = "w-auto",
+  height = "min-h-[392px] max-h-[500px]",
   floatingTransition,
   setVideoRef,
   autoPlay = true,
@@ -29,7 +29,7 @@ export const PhoneMockup = ({
   } = usePhoneMockup()
   return (
     <motion.div
-      className={`relative bg-gray-900 rounded-[40px] border-[8px] border-gray-700 overflow-hidden ${className} ${width} ${height}`}
+      className={`relative bg-gray-900 rounded-[40px] border-[8px] border-gray-700 overflow-hidden h-full aspect-[9/16] ${className} ${width} ${height}`}
       initial={animate ? { opacity: 0, y: 60 } : undefined}
       animate={animate ? (isIntroFinished && floatingAnimation ? floatingAnimation : { opacity: 1, y: 0 }) : undefined}
       viewport={{ once: true }}
@@ -44,7 +44,6 @@ export const PhoneMockup = ({
           playsInline={playsInline}
           autoPlay={autoPlay}
           onEnded={onEnded}
-          className="!max-w-[101%]"
         />
       ) : (
         children || (

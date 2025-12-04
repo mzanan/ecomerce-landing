@@ -13,14 +13,13 @@ interface ActionButtonsProps {
 
 export const ActionButtons = ({ className, primaryButtonAnimation, secondaryButtonAnimation }: ActionButtonsProps) => {
     return (
-        <motion.div className={`flex flex-col md:flex-row gap-4 items-center justify-center ${className}`}>
+        <motion.div className={`flex flex-row gap-4 items-center justify-center ${className}`}>
             <motion.div
-                className="w-full sm:w-auto"
+                className="max-w-[290px] w-full"
                 {...primaryButtonAnimation}
             >
                 <PrimaryButton
                     fullWidth
-                    className="sm:w-auto"
                     onClick={() => {
                         document.getElementById('pricing')?.scrollIntoView({
                             behavior: 'smooth',
@@ -28,20 +27,24 @@ export const ActionButtons = ({ className, primaryButtonAnimation, secondaryButt
                         })
                     }}
                 >
-                    Start Your Store Now
-                    <ArrowRight className="w-5 h-5 ml-2" />
+                    <span className="hidden sm:inline">Start Your Store Now</span>
+
+                    <span className="inline sm:hidden">Start Now</span>
+                    <ArrowRight className="w-5 h-5 ml-2 hidden md:inline" />
                 </PrimaryButton>
             </motion.div>
             <motion.div
-                className="w-full sm:w-auto"
+                className="max-w-[290px] w-full"
                 {...secondaryButtonAnimation}
             >
                 <SecondaryButton
                     fullWidth
-                    className="sm:w-auto"
                     onClick={() => window.open(COMPANY.demoUrl, "_blank")}
                 >
-                    View Live Demo
+
+                    <span className="hidden sm:inline">View Live Demo</span>
+
+                    <span className="inline sm:hidden">Live Demo</span>
                 </SecondaryButton>
             </motion.div>
         </motion.div>

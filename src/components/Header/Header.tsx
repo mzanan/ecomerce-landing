@@ -22,7 +22,7 @@ export const Header = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent pointer-events-none"></div>
 
         <div className="relative px-2 md:px-6 flex items-center justify-between h-12 md:h-16">
-          <LinkButton 
+          <LinkButton
             variant="brand"
             onClick={() => window.location.href = "/"}
           >
@@ -46,14 +46,14 @@ export const Header = () => {
             ))}
           </nav>
           <div className="flex items-center">
-            <PrimaryButton
-              onClick={() => scrollToSection("#pricing")}
-            >
-              Start Your Store Today
+            <PrimaryButton onClick={() => scrollToSection("#pricing")}>
+              <span className="hidden sm:inline">Start Your Store Now</span>
+
+              <span className="inline sm:hidden">Start Now</span>
             </PrimaryButton>
           </div>
         </div>
       </motion.div>
-    </header>
+    </header >
   )
 } 

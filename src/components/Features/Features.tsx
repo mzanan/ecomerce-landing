@@ -23,12 +23,11 @@ const MediaRenderer = ({ feature, isModal = false, videoRef, className = "" }: M
       autoPlay: true, loop: true, muted: !isModal, controls: isModal, playsInline: true,
     }
 
-    // Configuración de fuentes con Aspect Ratio Estricto
     const sources = [
       {
         src: feature.mobileMedia,
-        visibility: "block md:hidden",
-        aspectClass: "aspect-[9/16]", // Force 9:16 mobile
+        visibility: "inline md:hidden",
+        aspectClass: "aspect-[9/16] max-h-[500px] h-full", // Force 9:16 mobile
         ref: videoRef
       },
       {
@@ -47,9 +46,7 @@ const MediaRenderer = ({ feature, isModal = false, videoRef, className = "" }: M
             {...videoProps}
             ref={source.ref}
             src={source.src}
-            // Combinamos visibilidad, aspect ratio y object-cover para recortar si es necesario
-            className={`w-full ${source.aspectClass} ${source.visibility} object-cover ${isModal ? "rounded-2xl max-w-full max-h-full h-auto" : "h-auto"
-              } ${className}`}
+            className={`w-full object-contain ${source.aspectClass} ${source.visibility} ${className}`}
           />
         ))}
       </>
@@ -58,13 +55,13 @@ const MediaRenderer = ({ feature, isModal = false, videoRef, className = "" }: M
 
   // Renderizado de Imagen
   return (
-    <div className={`relative ${isModal ? "w-auto h-auto max-w-full max-h-full" : "w-full h-full flex items-center justify-center bg-gray-100"}`}>
+    <div className="relative w-full h-full flex items-center justify-center aspect-[9/16] md:aspect-video">
       <Image
         src={feature.media}
         alt={feature.title}
         width={isModal ? 1200 : 800}
         height={isModal ? 800 : 600}
-        className={`${isModal ? "max-w-full max-h-full object-contain rounded-2xl" : "w-full h-full object-cover"}`}
+        className="w-full h-full object-cover"
         priority={!isModal && feature.id < 2}
       />
     </div>
@@ -73,18 +70,18 @@ const MediaRenderer = ({ feature, isModal = false, videoRef, className = "" }: M
 
 // --- Sub-component: Feature Info Card ---
 const FeatureInfo = ({ feature }: { feature: Feature }) => (
-  <Card className="h-full bg-white/50 backdrop-blur-sm border-white/30 flex flex-col overflow-hidden shadow-sm hover:bg-white/70 transition-all duration-300">
-    <div className="p-6 pb-2 flex-none">
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-yellow-300/10 flex items-center justify-center flex-none">
-          <span className="text-xl md:text-2xl">{feature.icon}</span>
-        </div>
-        <h3 className="text-xl md:text-2xl font-bold text-black leading-tight">
-          {feature.title}
-        </h3>
+  <Card className="bg-transparent border-none hover:bg-white/70 
+                  p-2 transition-all duration-300 w-fit mx-auto">
+    <div className="flex items-center justify-center md:p-6 md:pb-2">
+      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-yellow-300/10 
+                      hidden md:flex items-center justify-center flex-none">
+        <span className="text-xl md:text-2xl">{feature.icon}</span>
       </div>
+      <h3 className="text-xl md:text-2xl font-bold text-black leading-tight">
+        {feature.title}
+      </h3>
     </div>
-    <div className="flex-1 overflow-y-auto px-6 pb-6 min-h-0">
+    <div className="hidden md:inline flex-1 overflow-y-auto px-6 pb-6 min-h-0">
       <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">
         {feature.description}
       </p>
@@ -129,20 +126,23 @@ export const Features = () => {
           return (
             <motion.div
               key={index}
-              className={`snap-start h-dvh flex flex-col lg:flex-row gap-12 items-center justify-center ${!isEven ? "lg:flex-row-reverse" : ""
-                }`}
+              className={`snap-start h-dvh flex flex-col-reverse pt-20 p-4
+                        items-center justify-center 
+                        lg:flex-row gap-4 md:gap-12
+                        ${!isEven ? "lg:flex-row-reverse" : ""}`}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
             >
               {/* Media Column */}
               <motion.div
-                className="flex-3"
+                className="h-full max-h-[500px] md:h-auto md:flex-2"
                 custom={isEven}
                 variants={mediaVariants}
               >
                 <div
-                  className="w-full h-auto bg-gray-900 rounded-2xl overflow-hidden shadow-xl cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+                  className="rounded-2xl overflow-hidden shadow-xl w-fit mx-auto max-h-[500px] h-full
+                            cursor-pointer hover:scale-[1.02] transition-transform duration-300"
                   onClick={() => handleMediaClick(index, feature)}
                 >
                   <MediaRenderer
@@ -154,7 +154,7 @@ export const Features = () => {
 
               {/* Text Column */}
               <motion.div
-                className="flex-1"
+                className="md:flex-1"
                 custom={isEven}
                 variants={textVariants}
               >

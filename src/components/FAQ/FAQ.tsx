@@ -8,7 +8,7 @@ export const FAQ = () => {
   const { faqs, fadeInUp, cardVariants } = useFAQ()
 
   return (
-    <section id="faq" className="section-layout">
+    <section id="faq" className="section-layout h-dvh">
       <div className="section-container">
         <motion.div className="section-header" {...fadeInUp}>
           <h2 className="main-heading">
@@ -16,7 +16,7 @@ export const FAQ = () => {
           </h2>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto space-y-6">
+        <div className="max-w-3xl mx-auto space-y-3 md:space-y-6">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
@@ -26,12 +26,12 @@ export const FAQ = () => {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="p-6 card-glass">
-                <div className="space-y-3">
-                  <h3 className="text-lg font-bold text-heading">
+              <Card className="p-4 md:p-6 card-glass">
+                <div className="space-y-1 md:space-y-3">
+                  <h3 className="md:text-lg font-bold text-black">
                     {faq.question}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-sm md:text-base text-gray-600 md:leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>

@@ -10,22 +10,22 @@ export const Hero = () => {
     floatingAnimation,
     mockupFloatingCards,
     isIntroFinished,
-    titleWordFadeIn,
-    subtitleWordFadeIn,
     descriptionFadeIn,
     primaryButtonFadeIn,
     secondaryButtonFadeIn,
     phoneMockupFadeIn,
+    titleWordFadeIn,
+    subtitleWordFadeIn,
     floatingTransition,
     handleIntroAnimationComplete
   } = useHero()
 
   return (
-    <section className="section-layout section-container">
-      <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
-        <div className="flex flex-col gap-8 justify-center items-center">
+    <section className="section-layout section-container h-dvh">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-8 sm:justify-center items-center h-full">
+        <div className="flex flex-col gap-4 md:gap-8">
           <div className="text-center">
-            <motion.h1 className="text-3xl lg:text-7xl font-bold text-black">
+            <motion.h1 className="xs:text-xl xm:text-2xl lg:text-7xl font-bold text-black">
               {"Launch your store today.".split(" ").map((word, index) => (
                 <motion.span
                   key={index}
@@ -36,7 +36,7 @@ export const Hero = () => {
                 </motion.span>
               ))}
             </motion.h1>
-            <motion.h1 className="text-3xl lg:text-7xl font-bold bg-gradient-text">
+            <motion.h1 className="xs:text-2xl xm:text-3xl lg:text-7xl font-bold bg-gradient-text">
               {"No code, no delays.".split(" ").map((word, index) => (
                 <motion.span
                   key={index}
@@ -50,7 +50,7 @@ export const Hero = () => {
           </div>
 
           <motion.p
-            className="text-md md:text-xl text-gray-600 text-center max-w-3xl"
+            className="hidden md:block text-md md:text-xl text-gray-600 text-center max-w-3xl"
             {...descriptionFadeIn}
           >
             A fully custom e‑commerce solution with admin dashboard, Stripe integration, mobile‑ready design, and branding. Ready to sell from day one.
@@ -59,12 +59,13 @@ export const Hero = () => {
           <ActionButtons
             primaryButtonAnimation={primaryButtonFadeIn}
             secondaryButtonAnimation={secondaryButtonFadeIn}
+            className="text-sm sm:text-base"
           />
         </div>
 
-        <motion.div {...phoneMockupFadeIn}>
+        <motion.div {...phoneMockupFadeIn} className="max-h-[500px] md:max-h-[500px] h-full">
           <motion.div
-            className="relative flex"
+            className="relative h-full"
             onAnimationComplete={handleIntroAnimationComplete}
           >
             <PhoneMockup
@@ -72,8 +73,6 @@ export const Hero = () => {
               floatingAnimation={floatingAnimation}
               floatingTransition={floatingTransition}
               isIntroFinished={isIntroFinished}
-              width="w-auto"
-              height="h-[650px] aspect-[9/16]"
             />
 
             {mockupFloatingCards.map((card, index) => (
@@ -97,6 +96,6 @@ export const Hero = () => {
           </motion.div>
         </motion.div>
       </div>
-    </section>
+    </section >
   )
 } 

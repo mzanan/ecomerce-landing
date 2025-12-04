@@ -9,16 +9,16 @@ export interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   baseClasses?: string
 }
 
-export const BaseButton = ({ 
-  children, 
-  isLoading = false, 
+export const BaseButton = ({
+  children,
+  isLoading = false,
   loadingText,
   fullWidth = false,
   size = "default",
   baseClasses = "",
   className = "",
   disabled,
-  ...props 
+  ...props
 }: BaseButtonProps) => {
   const sizeClasses = {
     sm: "px-4 py-2 text-sm h-9",
@@ -27,7 +27,7 @@ export const BaseButton = ({
   }
 
   const baseStyles = `transition-all duration-300 hover:scale-105 flex items-center justify-center ${fullWidth && "w-full"} ${sizeClasses[size]}`
-  
+
   return (
     <button
       disabled={disabled || isLoading}

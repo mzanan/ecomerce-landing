@@ -19,7 +19,7 @@ export const useFAQ = () => {
     },
     {
       question: "Is the admin panel included?",
-      answer: "Yes — both plans include a full admin dashboard."
+      answer: "Yes, both plans include a full admin dashboard."
     },
     {
       question: "How long does setup take?",

@@ -10,8 +10,8 @@ export const Pricing = () => {
   return (
     <section id="pricing" className="section-layout">
       <div className="section-container">
-        <motion.div 
-          className="section-header"
+        <motion.div
+          className="section-header mb-2 md:mb-0"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0 }}
@@ -23,7 +23,7 @@ export const Pricing = () => {
           <p className="sub-heading">
             Different plans for different needs.
           </p>
-          <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-4 max-w-2xl mx-auto mt-6">
+          <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-4 max-w-2xl mx-auto">
             <p className="text-yellow-800 text-sm font-medium text-center">
               Payments are in demo mode using Stripe, so no real charges will be made.
             </p>
@@ -32,12 +32,11 @@ export const Pricing = () => {
             </p>
           </div>
         </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-8 max-w-3xl mx-auto w-full">
           {pricingPlans.map((plan, index) => {
             const productKey = plan.name === "Launch Ready" ? "launch-ready" : "custom-pro"
             return (
-              <PricingCard 
+              <PricingCard
                 key={index}
                 plan={plan}
                 productKey={productKey}
@@ -46,6 +45,6 @@ export const Pricing = () => {
           })}
         </div>
       </div>
-    </section>
+    </section >
   )
-} 
+}

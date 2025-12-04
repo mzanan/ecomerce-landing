@@ -1,7 +1,8 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@config "../../tailwind.config.js";
 
 @variant dark (&:where(.dark, .dark *));
-@import "tw-animate-css";
 
 :root {
   --background: hsl(0 0% 100%);
@@ -209,32 +210,28 @@
   }
 
   /* Custom utility classes for repeated patterns */
+  .section-layout {
+    @apply snap-start flex justify-center items-center pt-20;
+  }
+
   .section-container {
-    @apply container mx-auto relative z-10;
+    @apply relative sm:container;
   }
 
   .section-header {
-    @apply text-center space-y-6 mb-16;
+    @apply text-center md:space-y-6 md:mb-16;
   }
 
   .main-heading {
-    @apply text-4xl lg:text-6xl font-bold text-black;
+    @apply text-2xl xm:text-3xl lg:text-6xl font-bold text-black;
   }
 
   .sub-heading {
-    @apply text-xl text-gray-600 max-w-3xl mx-auto;
-  }
-
-  .section-layout {
-    @apply snap-start min-h-dvh flex items-center pt-20;
+    @apply xm:text-xl text-gray-600 max-w-3xl mx-auto mb-4 md:mb-0;
   }
 
   .card-glass {
     @apply backdrop-blur-sm border border-gray-200/50 bg-white/10 shadow-lg rounded-xl;
-  }
-
-  .text-heading {
-    @apply text-black;
   }
 
   .bg-main-gradient {

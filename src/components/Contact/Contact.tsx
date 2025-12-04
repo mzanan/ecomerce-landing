@@ -21,8 +21,8 @@ export const Contact = () => {
   } = useContact()
 
   return (
-    <section id="contact" className="section-layout">
-      <div className="section-container">
+    <section id="contact" className="section-layout h-dvh">
+      <div className="section-container md:space-y-6">
         <motion.div
           className="section-header"
           {...fadeInUp}
@@ -30,12 +30,12 @@ export const Contact = () => {
           <h2 className="main-heading">
             Get in touch
           </h2>
-          <p className="sub-heading">
+          <p className="sub-heading ">
             Have a question or want to work together? We&apos;d love to hear from you.
           </p>
         </motion.div>
 
-        <div className="mt-12 max-w-3xl mx-auto">
+        <div className="md:mt-12 max-w-3xl mx-auto">
           {/* Contact Form */}
           <motion.div
             variants={formVariants}
@@ -43,8 +43,8 @@ export const Contact = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <Card className="p-8 h-full card-glass">
-              <form onSubmit={handleSubmit} className="h-full flex flex-col gap-6">
+            <Card className="p-4 md:p-8 card-glass">
+              <form onSubmit={handleSubmit} className="h-full flex flex-col gap-3 md:gap-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="name">Name</Label>
@@ -57,6 +57,7 @@ export const Contact = () => {
                       onChange={handleInputChange}
                       required
                       disabled={isSubmitting || isSubmitted}
+                      className="text-sm md:text-base"
                     />
                   </div>
                   <div>
@@ -70,6 +71,7 @@ export const Contact = () => {
                       onChange={handleInputChange}
                       required
                       disabled={isSubmitting || isSubmitted}
+                      className="text-sm md:text-base"
                     />
                   </div>
                 </div>
@@ -85,6 +87,7 @@ export const Contact = () => {
                     onChange={handleInputChange}
                     required
                     disabled={isSubmitting || isSubmitted}
+                    className="text-sm md:text-base"
                   />
                 </div>
 
@@ -99,7 +102,7 @@ export const Contact = () => {
                     onChange={handleInputChange}
                     required
                     disabled={isSubmitting || isSubmitted}
-                    className="resize-none h-full"
+                    className="resize-none h-full text-sm md:text-base"
                   />
                 </div>
                 <div className="self-center">
@@ -121,6 +124,7 @@ export const Contact = () => {
                       ) : null
                     }
                     isLoading={isSubmitting || isSubmitted}
+                    className="text-sm md:text-base"
                   >
                     <Send className="w-4 h-4 mr-2" />
                     Send Message
@@ -132,7 +136,7 @@ export const Contact = () => {
         </div>
 
         <motion.div
-          className="mt-12 max-w-3xl mx-auto"
+          className="mt-12 max-w-3xl mx-auto hidden md:block"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.8 }}
@@ -140,7 +144,7 @@ export const Contact = () => {
         >
           <Card className="p-6 card-glass">
             <div className="text-center space-y-4">
-              <h3 className="text-xl font-bold text-heading">
+              <h3 className="text-xl font-bold text-black">
                 Quick Response
               </h3>
               <p className="text-gray-600">
@@ -154,7 +158,7 @@ export const Contact = () => {
             </div>
           </Card>
         </motion.div>
-      </div>
-    </section>
+      </div >
+    </section >
   )
 } 

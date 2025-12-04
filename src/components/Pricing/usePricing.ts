@@ -8,7 +8,7 @@ export const usePricing = () => {
     {
       name: "Launch Ready",
       price: "$1,500",
-      tagline: "Launch fast with a ready-to-sell store — everything you need, no code required.",
+      tagline: "Launch fast with a ready-to-sell store. Everything you need, no code required.",
       features: [
         "Admin dashboard (manage products, orders, customers)",
         "Stripe integration for secure checkout",
