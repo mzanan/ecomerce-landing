@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { Check, Loader2, Send } from "lucide-react"
 import { PrimaryButton } from "@/components/styles/buttons"
 import { Card } from "@/components/ui/card"

@@ -6,7 +6,7 @@ Nota: el package.json se llama `infideli-landing` (legacy), pero el proyecto viv
 
 ## Stack
 
-Next 15 · React 19 · TypeScript · Tailwind v4 · Turbopack · Stripe · nodemailer · Radix · Framer Motion · Embla.
+Next 15 · React 19 · TypeScript · Tailwind v4 · Turbopack · Stripe · nodemailer · Radix · `motion/react` (paquete `motion`, ex framer-motion) · Embla.
 
 ## Comandos
 
@@ -38,6 +38,9 @@ npm run format       # prettier --write .
 - Error 535-5.7.8 BadCredentials = Gmail App Password vencida → regenerar.
 - Componentes en pares `Component.tsx` + `useComponent.ts`.
 - Contact form se mantiene formal/B2B (a diferencia del portfolio).
+- Animaciones: `import { motion } from "motion/react"` (NO `framer-motion`).
+- Videos: `<video preload="none" poster={src.replace(/\.mp4$/, '.webp')}>`. `LazyVideo` existe en `src/components/LazyVideo/` pero NO se usa en PhoneMockup/Features (dependen de `setVideoRef` del padre).
+- Build local: necesita `NEXT_PUBLIC_APP_URL` seteado (el layout tira si falta).
 
 ## Heurísticas
 

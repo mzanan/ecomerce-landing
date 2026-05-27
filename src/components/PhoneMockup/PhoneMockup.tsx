@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { usePhoneMockup } from "./usePhoneMockup"
 import type { PhoneMockupProps, AnimatedElementProps } from "./types"
 
@@ -39,6 +39,8 @@ export const PhoneMockup = ({
         <video
           ref={setVideoRef}
           src={videoSrc}
+          poster={videoSrc.replace(/\.mp4$/, ".webp")}
+          preload="none"
           loop
           muted={muted}
           playsInline={playsInline}

@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { ActionButtons } from "@/components/styles/buttons"
 import { PhoneMockup } from "@/components/PhoneMockup/PhoneMockup"
 import { useHero } from "./useHero"

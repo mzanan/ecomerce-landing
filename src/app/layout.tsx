@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { StructuredData } from "@/components/seo/StructuredData";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -35,20 +36,11 @@ export const metadata: Metadata = {
     siteName: "Matias Zanan",
     title: "Matias Zanan - Ecommerce Solutions",
     description: "Professional ecommerce landing pages and solutions. Build your online store with modern design and secure payments.",
-    images: [
-      {
-        url: "/og-default.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Matias Zanan - Ecommerce Solutions",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Matias Zanan - Ecommerce Solutions",
     description: "Professional ecommerce landing pages and solutions.",
-    images: ["/og-default.jpg"],
   },
   icons: {
     icon: "/icon.svg",
@@ -67,6 +59,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <StructuredData />
         {children}
         <Toaster />
       </body>

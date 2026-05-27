@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { type Transition } from "framer-motion"
+import { type Transition } from "motion/react"
 
 export const usePhoneMockup = () => {
   const [order, setOrder] = useState(initialOrder)

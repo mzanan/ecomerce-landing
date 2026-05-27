@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react"
 import { Check, X } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { useFeatures } from "./useFeatures"
@@ -46,6 +46,8 @@ const MediaRenderer = ({ feature, isModal = false, videoRef, className = "" }: M
             {...videoProps}
             ref={source.ref}
             src={source.src}
+            poster={source.src?.replace(/\.mp4$/, ".webp")}
+            preload="none"
             className={`w-full object-contain ${source.aspectClass} ${source.visibility} ${className}`}
           />
         ))}

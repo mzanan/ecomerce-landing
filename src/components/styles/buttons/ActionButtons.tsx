@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, HTMLMotionProps } from "framer-motion"
+import { motion, HTMLMotionProps } from "motion/react"
 import { ArrowRight } from "lucide-react"
 import { PrimaryButton, SecondaryButton } from "./index"
 import { COMPANY } from "@/lib/socials"

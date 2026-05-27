@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { TargetAndTransition, Transition } from "framer-motion"
+import { TargetAndTransition, Transition } from "motion/react"
 
 export interface PhoneMockupProps {
   videoSrc?: string
