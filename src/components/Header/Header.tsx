@@ -46,7 +46,7 @@ export const Header = () => {
             ))}
           </nav>
           <div className="flex items-center">
-            <PrimaryButton onClick={() => scrollToSection("#pricing")}>
+            <PrimaryButton onClick={() => { window.location.href = COMPANY.buyUrl }}>
               <span className="hidden sm:inline">Start Your Store Now</span>
 
               <span className="inline sm:hidden">Start Now</span>

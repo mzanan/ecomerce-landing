@@ -21,14 +21,9 @@ export const CTA = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <PrimaryButton
-              onClick={() => {
-                document.getElementById('pricing')?.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'start'
-                })
-              }}
+              onClick={() => { window.location.href = COMPANY.buyUrl }}
             >
-              Start Now
+              Check pricing on my portfolio
               <ArrowRight className="w-5 h-5 ml-2" />
             </PrimaryButton>
             <SecondaryButton

@@ -14,7 +14,6 @@ export const useHeader = () => {
   const navigationItems: NavigationItem[] = useMemo(() => [
     { href: "#demo", label: "Demo" },
     { href: "#features", label: "Features" },
-    { href: "#pricing", label: "Pricing" },
     { href: "#contact", label: "Contact" },
     { href: "#faq", label: "FAQ" },
   ], [])

@@ -20,12 +20,7 @@ export const ActionButtons = ({ className, primaryButtonAnimation, secondaryButt
             >
                 <PrimaryButton
                     fullWidth
-                    onClick={() => {
-                        document.getElementById('pricing')?.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        })
-                    }}
+                    onClick={() => { window.location.href = COMPANY.buyUrl }}
                 >
                     <span className="hidden sm:inline">Start Your Store Now</span>
 
