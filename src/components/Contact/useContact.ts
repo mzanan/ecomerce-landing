@@ -5,7 +5,7 @@ import { useForm } from "@formspree/react"
 import { ContactForm } from "./useContact.types"
 
 export const useContact = () => {
-  const { fadeInUp } = useAnimations()
+  const { staggerContainer, itemFadeUp } = useAnimations()
   const [formData, setFormData] = useState<ContactForm>({
     name: "",
     email: "",
@@ -33,22 +33,14 @@ export const useContact = () => {
     }))
   }
 
-  const formVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1.2, delay: 0.2 },
-    },
-  }
-
   return {
-    fadeInUp,
     formData,
+    setFormData,
     isSubmitting: state.submitting,
     isSubmitted: state.succeeded,
-    formVariants,
     handleInputChange,
     handleSubmit,
+    staggerContainer,
+    itemFadeUp,
   }
 }

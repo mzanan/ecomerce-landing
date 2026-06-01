@@ -3,162 +3,82 @@
 import { motion } from "motion/react"
 import { Check, Loader2, Send } from "lucide-react"
 import { PrimaryButton } from "@/components/styles/buttons"
-import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { useContact } from "./useContact"
+
+const fieldClasses =
+  "w-full bg-transparent border-b border-black/20 focus:border-pink-500 outline-none text-black text-lg md:text-xl py-2 placeholder:text-black/30 transition-colors disabled:opacity-50"
 
 export const Contact = () => {
   const {
-    fadeInUp,
     formData,
     isSubmitting,
     isSubmitted,
-    formVariants,
     handleInputChange,
-    handleSubmit
+    handleSubmit,
+    staggerContainer,
+    itemFadeUp,
   } = useContact()
+
+  const disabled = isSubmitting || isSubmitted
 
   return (
     <section id="contact" className="section-layout h-dvh">
-      <div className="section-container md:space-y-6">
+      <div className="section-container">
         <motion.div
-          className="section-header"
-          {...fadeInUp}
+          className="w-full max-w-3xl mx-auto flex flex-col gap-10"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
         >
-          <h2 className="main-heading">
-            Get in touch
-          </h2>
-          <p className="sub-heading ">
-            Have a question or want to work together? We&apos;d love to hear from you.
-          </p>
-        </motion.div>
-
-        <div className="md:mt-12 max-w-3xl mx-auto">
-          {/* Contact Form */}
-          <motion.div
-            variants={formVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <Card className="p-4 md:p-8 card-glass">
-              <form onSubmit={handleSubmit} className="h-full flex flex-col gap-3 md:gap-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      placeholder="Your name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      disabled={isSubmitting || isSubmitted}
-                      className="text-sm md:text-base"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      disabled={isSubmitting || isSubmitted}
-                      className="text-sm md:text-base"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    type="text"
-                    placeholder="What&apos;s this about?"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    required
-                    disabled={isSubmitting || isSubmitted}
-                    className="text-sm md:text-base"
-                  />
-                </div>
-
-                <div className="space-y-2 flex-1 pb-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell us more about your project..."
-                    rows={8}
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    disabled={isSubmitting || isSubmitted}
-                    className="resize-none h-full text-sm md:text-base"
-                  />
-                </div>
-                <div className="self-center">
-                  <PrimaryButton
-                    type="submit"
-                    fullWidth
-                    disabled={isSubmitting || isSubmitted}
-                    loadingText={
-                      isSubmitting ? (
-                        <>
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Sending...
-                        </>
-                      ) : isSubmitted ? (
-                        <>
-                          <Check className="w-4 h-4 mr-2" />
-                          Message Sent!
-                        </>
-                      ) : null
-                    }
-                    isLoading={isSubmitting || isSubmitted}
-                    className="text-sm md:text-base"
-                  >
-                    <Send className="w-4 h-4 mr-2" />
-                    Send Message
-                  </PrimaryButton>
-                </div>
-              </form>
-            </Card>
+          <motion.div variants={itemFadeUp} className="text-center space-y-3">
+            <h2 className="main-heading">Get in touch</h2>
+            <p className="sub-heading">
+              Have a question or want to work together? We&apos;d love to hear from you.
+            </p>
           </motion.div>
-        </div>
 
-        <motion.div
-          className="mt-12 max-w-3xl mx-auto hidden md:block"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <Card className="p-6 card-glass">
-            <div className="text-center space-y-4">
-              <h3 className="text-xl font-bold text-black">
-                Quick Response
-              </h3>
-              <p className="text-gray-600">
-                We typically respond to all inquiries within 24 hours during business days.
-              </p>
-              <div className="flex justify-center gap-2 text-sm text-gray-500">
-                <span>Mon-Fri</span>
-                <span>•</span>
-                <span>9AM-6PM PST</span>
-              </div>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <motion.div variants={itemFadeUp} className="flex flex-col gap-1">
+                <label htmlFor="name" className="text-sm text-gray-500">Name</label>
+                <input id="name" name="name" type="text" required value={formData.name} onChange={handleInputChange} disabled={disabled} placeholder="Your name" className={fieldClasses} />
+              </motion.div>
+              <motion.div variants={itemFadeUp} className="flex flex-col gap-1">
+                <label htmlFor="email" className="text-sm text-gray-500">Email</label>
+                <input id="email" name="email" type="email" required value={formData.email} onChange={handleInputChange} disabled={disabled} placeholder="you@email.com" className={fieldClasses} />
+              </motion.div>
             </div>
-          </Card>
+            <motion.div variants={itemFadeUp} className="flex flex-col gap-1">
+              <label htmlFor="message" className="text-sm text-gray-500">Message</label>
+              <textarea id="message" name="message" rows={3} required value={formData.message} onChange={handleInputChange} disabled={disabled} placeholder="Tell us about your project…" className={`${fieldClasses} resize-none`} />
+            </motion.div>
+            <motion.div variants={itemFadeUp} className="self-center mt-2">
+              <PrimaryButton
+                type="submit"
+                disabled={disabled}
+                isLoading={disabled}
+                loadingText={
+                  isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Sending...
+                    </>
+                  ) : isSubmitted ? (
+                    <>
+                      <Check className="w-4 h-4 mr-2" />
+                      Message Sent!
+                    </>
+                  ) : null
+                }
+              >
+                <Send className="w-4 h-4 mr-2" />
+                Send Message
+              </PrimaryButton>
+            </motion.div>
+          </form>
         </motion.div>
-      </div >
-    </section >
+      </div>
+    </section>
   )
-} 
+}
