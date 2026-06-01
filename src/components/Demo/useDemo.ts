@@ -2,8 +2,10 @@
 
 import { useState, useRef, useCallback, useEffect } from "react"
 import useEmblaCarousel from "embla-carousel-react"
+import { useAnimations } from "@/hooks/useAnimations"
 
 export const useDemo = () => {
+  const { staggerContainer, itemFadeUp } = useAnimations()
   const slidePairs = [
     {
       desktop: "/videos/demos/desktop/1.mp4",
@@ -65,7 +67,7 @@ export const useDemo = () => {
   const setVideoRef = useCallback((videoKey: string, element: HTMLVideoElement | null) => {
     videoRefs.current[videoKey] = element
     if (element) {
-      element.playbackRate = 1.5
+      element.playbackRate = 1.1
     }
   }, [])
 
@@ -126,6 +128,8 @@ export const useDemo = () => {
     playingStates,
     toggleVideoPlayback,
     setVideoRef,
-    emblaRef
+    emblaRef,
+    staggerContainer,
+    itemFadeUp,
   }
 } 
