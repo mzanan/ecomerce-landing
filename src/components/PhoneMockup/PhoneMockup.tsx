@@ -46,6 +46,7 @@ export const PhoneMockup = ({
           playsInline={playsInline}
           autoPlay={autoPlay}
           onEnded={onEnded}
+          className="absolute inset-0 video-compensate-rounded"
         />
       ) : (
         children || (
