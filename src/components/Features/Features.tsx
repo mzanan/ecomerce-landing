@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react"
 import { Check, X } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { useFeatures } from "./useFeatures"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Feature } from "./useFeatures.types"
 
 // --- Interfaces ---
@@ -16,38 +16,75 @@ interface MediaRendererProps {
   className?: string
 }
 
-// --- Sub-component: Media Renderer (Optimized with Aspect Ratios) ---
+const toMediaArray = (media: string | string[]) =>
+  Array.isArray(media) ? media : [media]
+
+interface SequentialVideoProps {
+  srcs: string[]
+  isModal?: boolean
+  videoRef?: React.Ref<HTMLVideoElement>
+  className?: string
+}
+
+const SequentialVideo = ({ srcs, isModal = false, videoRef, className = "" }: SequentialVideoProps) => {
+  const innerRef = useRef<HTMLVideoElement | null>(null)
+  const [index, setIndex] = useState(0)
+  const single = srcs.length <= 1
+
+  const assignRef = (el: HTMLVideoElement | null) => {
+    innerRef.current = el
+    if (typeof videoRef === "function") videoRef(el)
+    else if (videoRef) (videoRef as React.MutableRefObject<HTMLVideoElement | null>).current = el
+  }
+
+  useEffect(() => {
+    if (!single) innerRef.current?.play().catch(() => {})
+  }, [index, single])
+
+  const src = srcs[index]
+
+  return (
+    <video
+      ref={assignRef}
+      src={src}
+      poster={src.replace(/\.mp4$/, ".webp")}
+      autoPlay
+      loop={single}
+      muted={!isModal}
+      controls={isModal}
+      playsInline
+      preload="none"
+      onEnded={single ? undefined : () => setIndex((i) => (i + 1) % srcs.length)}
+      className={className}
+    />
+  )
+}
+
 const MediaRenderer = ({ feature, isModal = false, videoRef, className = "" }: MediaRendererProps) => {
   if (feature.mediaType === "video") {
-    const videoProps = {
-      autoPlay: true, loop: true, muted: !isModal, controls: isModal, playsInline: true,
-    }
-
     const sources = [
       {
-        src: feature.mobileMedia,
+        srcs: toMediaArray(feature.mobileMedia),
         visibility: "inline md:hidden",
-        aspectClass: "aspect-[9/16] max-h-[500px] h-full", // Force 9:16 mobile
-        ref: videoRef
+        aspectClass: "aspect-[9/16] max-h-[500px] h-full",
+        ref: videoRef,
       },
       {
-        src: feature.media,
+        srcs: toMediaArray(feature.media),
         visibility: "hidden md:block",
-        aspectClass: "aspect-video video-compensate-rounded",  // Force 16:9 desktop
-        ref: null
+        aspectClass: "aspect-video video-compensate-rounded",
+        ref: null,
       },
     ]
 
     return (
       <>
         {sources.map((source, idx) => (
-          <video
+          <SequentialVideo
             key={idx}
-            {...videoProps}
-            ref={source.ref}
-            src={source.src}
-            poster={source.src?.replace(/\.mp4$/, ".webp")}
-            preload="none"
+            srcs={source.srcs}
+            isModal={isModal}
+            videoRef={source.ref}
             className={`w-full object-contain ${source.aspectClass} ${source.visibility} ${className}`}
           />
         ))}
@@ -59,7 +96,7 @@ const MediaRenderer = ({ feature, isModal = false, videoRef, className = "" }: M
   return (
     <div className="relative w-full h-full flex items-center justify-center aspect-[9/16] md:aspect-video">
       <Image
-        src={feature.media}
+        src={toMediaArray(feature.media)[0]}
         alt={feature.title}
         width={isModal ? 1200 : 800}
         height={isModal ? 800 : 600}

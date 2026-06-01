@@ -59,21 +59,6 @@ export const useFeatures = () => {
       mediaType: "video",
     },
     {
-      id: 1,
-      title: "Unique Product Layouts",
-      description:
-        "Showcase your collections with style. This e-commerce template features a variety of refined and creative layouts designed to highlight product sets like fashion collections. Each layout offers a distinct, editorial feel, blending elegance and originality to elevate the shopping experience.",
-      features: [
-        "Designed for visual impact",
-        "Multiple layout variations",
-        "Perfect for lookbooks and curated drops",
-      ],
-      icon: "✨",
-      media: "/videos/demos/desktop/2.mp4",
-      mobileMedia: "/videos/demos/mobile/2.mp4",
-      mediaType: "video",
-    },
-    {
       id: 2,
       title: "Immersive Product View",
       description:
@@ -92,11 +77,11 @@ export const useFeatures = () => {
       id: 3,
       title: "Cart and checkout flow",
       description:
-        'The cart and checkout flow is designed to be smooth and intuitive. Users can add items to the cart, view the cart, and checkout with ease. The checkout flow is designed to be smooth and intuitive. Users can add items to the cart, view the cart, and checkout with ease.',
+        "A smooth, intuitive path from cart to payment, built to convert. Customers review their cart, adjust quantities, and check out in just a few clicks, fast, secure, and friction-free.",
       features: [
-        "Smooth and intuitive cart and checkout flow",
-        "Easy to use and navigate",
-        "Fast and secure checkout",
+        "Clear cart review and editing",
+        "Fast, secure checkout",
+        "Designed to reduce drop-off",
       ],
       icon: "🛍️",
       media: "/videos/demos/desktop/4.mp4",
@@ -105,54 +90,24 @@ export const useFeatures = () => {
     },
     {
       id: 4,
-      title: "Powerful Admin Dashboard",
+      title: "Unique Product Layouts",
       description:
-        "Track and manage your store's sales in real time. The admin panel shows every order's status, payment, and shipping info at a glance, with the option to view full details directly in Stripe.",
+        "Showcase your collections with style. A variety of refined, creative layouts highlight product sets like fashion collections, each with a distinct, editorial feel that elevates the shopping experience.",
       features: [
-        "Live order tracking",
-        "Revenue and customer stats",
-        "One-click access to Stripe dashboard",
+        "Multiple layout variations",
+        "Editorial, lookbook-ready presentations",
+        "Designed for visual impact",
       ],
-      icon: "📊",
-      media: "/images/4.png",
-      mobileMedia: "/images/4.png",
-      mediaType: "image",
-    },
-    {
-      id: 5,
-      title: "One-Click Stripe Sync",
-      description:
-        "Save time by syncing your products with Stripe in just one click. No need to recreate items manually; your product catalog stays connected and up to date automatically.",
-      features: [
-        "Sync all products at once",
-        "Avoid duplicate work",
-        "Always up-to-date in Stripe",
-      ],
-      icon: "⚡",
-      media: "/images/5.png",
-      mobileMedia: "/images/5.png",
-      mediaType: "image",
-    },
-    {
-      id: 6,
-      title: "Unique Set Layouts",
-      description:
-        "Break the mold of conventional storefronts. Choose from a range of modern, elegant layouts to showcase each set with a distinct visual style, so every collection feels fresh and unique.",
-      features: [
-        "Multiple layout options",
-        "Visually diverse presentations",
-        "Sleek and modern design",
-      ],
-      icon: "🎨",
-      media: "/videos/demos/desktop/6.mp4",
-      mobileMedia: "/videos/demos/mobile/4.mp4",
+      icon: "✨",
+      media: "/videos/demos/desktop/2.mp4",
+      mobileMedia: "/videos/demos/mobile/2.mp4",
       mediaType: "video",
     },
     {
-      id: 7,
-      title: "Editable Homepage Banners",
+      id: 5,
+      title: "Homepage Banner Editor",
       description:
-        "Easily create and update homepage text banners to highlight offers, announcements, or promotions. Rearrange components with simple drag-and-drop; no developer needed.",
+        "Easily create and update homepage text banners to highlight offers, announcements, or promotions. Rearrange components with simple drag-and-drop, no developer needed.",
       features: [
         "Create and edit text banners",
         "Drag-and-drop layout control",
@@ -161,6 +116,21 @@ export const useFeatures = () => {
       icon: "🏷️",
       media: "/videos/demos/desktop/7.mp4",
       mobileMedia: "/videos/demos/mobile/4.mp4",
+      mediaType: "video",
+    },
+    {
+      id: 6,
+      title: "Set Layout Editor",
+      description:
+        "From the admin panel, choose and arrange the layout for each product set, no code required. Pick from a range of modern, elegant styles so every collection looks distinct and on-brand.",
+      features: [
+        "Pick a layout per set from the panel",
+        "Modern, elegant style presets",
+        "No code required",
+      ],
+      icon: "🎨",
+      media: "/videos/demos/desktop/6.mp4",
+      mobileMedia: "/videos/demos/mobile/2.mp4",
       mediaType: "video",
     },
   ], [])
