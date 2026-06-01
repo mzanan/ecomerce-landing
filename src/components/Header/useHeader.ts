@@ -19,41 +19,31 @@ export const useHeader = () => {
   ], [])
 
   useEffect(() => {
-    const updateActiveSection = () => {
-      const hash = window.location.hash
-      if (hash) {
-        setActiveSection(hash)
-      } else {
-        setActiveSection("")
-      }
-    }
+    const order = navigationItems.map((item) => item.href.replace("#", ""))
+    const sections = order
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null)
 
-    const handleScroll = () => {
-      const sections = navigationItems.map(item => item.href.replace('#', ''))
-      const scrollPosition = window.scrollY + 200
+    if (sections.length === 0) return
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const element = document.getElementById(sections[i])
-        if (element) {
-          const offsetTop = element.offsetTop
-          if (scrollPosition >= offsetTop) {
-            setActiveSection(`#${sections[i]}`)
-            return
-          }
-        }
-      }
-    }
+    const visible = new Set<string>()
 
-    updateActiveSection()
-    window.addEventListener("hashchange", updateActiveSection)
-    window.addEventListener("popstate", updateActiveSection)
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    
-    return () => {
-      window.removeEventListener("hashchange", updateActiveSection)
-      window.removeEventListener("popstate", updateActiveSection)
-      window.removeEventListener("scroll", handleScroll)
-    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visible.add(entry.target.id)
+          else visible.delete(entry.target.id)
+        })
+
+        const current = order.find((id) => visible.has(id))
+        if (current) setActiveSection(`#${current}`)
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+
+    return () => observer.disconnect()
   }, [navigationItems])
 
   const scrollToSection = useCallback((hash: string) => {
@@ -67,4 +57,4 @@ export const useHeader = () => {
     scrollToSection,
     activeSection,
   }
-} 
+}
