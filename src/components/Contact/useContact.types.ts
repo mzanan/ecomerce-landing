@@ -3,10 +3,4 @@ export interface ContactForm {
   email: string
   subject: string
   message: string
-}
-
-export interface ContactApiResponse {
-  success: boolean
-  messageId?: string
-  error?: string
 } 

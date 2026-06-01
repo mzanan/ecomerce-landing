@@ -1,7 +1,8 @@
 import { useAnimations } from "@/hooks/useAnimations"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { toast } from "sonner"
-import { ContactForm, ContactApiResponse } from "./useContact.types"
+import { useForm } from "@formspree/react"
+import { ContactForm } from "./useContact.types"
 
 export const useContact = () => {
   const { fadeInUp } = useAnimations()
@@ -11,8 +12,16 @@ export const useContact = () => {
     subject: "",
     message: "",
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [state, handleSubmit] = useForm(
+    process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID ?? ""
+  )
+
+  useEffect(() => {
+    if (state.succeeded) {
+      toast.success("Message sent successfully!")
+      setFormData({ name: "", email: "", subject: "", message: "" })
+    }
+  }, [state.succeeded])
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -22,48 +31,6 @@ export const useContact = () => {
       ...prev,
       [name]: value,
     }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      const data: ContactApiResponse = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message')
-      }
-
-      setIsSubmitted(true)
-      toast.success('Message sent successfully!')
-
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-        })
-        setIsSubmitted(false)
-      }, 3000)
-
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to send message'
-      toast.error(errorMessage)
-      console.error('Contact form error:', error)
-    } finally {
-      setIsSubmitting(false)
-    }
   }
 
   const formVariants = {
@@ -78,10 +45,10 @@ export const useContact = () => {
   return {
     fadeInUp,
     formData,
-    isSubmitting,
-    isSubmitted,
+    isSubmitting: state.submitting,
+    isSubmitted: state.succeeded,
     formVariants,
     handleInputChange,
-    handleSubmit
+    handleSubmit,
   }
-} 
+}
