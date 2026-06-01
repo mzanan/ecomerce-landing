@@ -16,7 +16,7 @@ export const FAQ = () => {
           </h2>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto space-y-3 md:space-y-6">
+        <div className="max-w-4xl mx-auto space-y-3 md:space-y-6">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}

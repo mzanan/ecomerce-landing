@@ -10,20 +10,20 @@ export const useFAQ = () => {
 
   const faqs: FAQ[] = [
     {
-      question: "Can I upgrade from Launch Ready to Custom Pro later?",
-      answer: "Yes! You can start with Launch Ready and upgrade anytime as your business grows."
+      question: "Do I get the full source code?",
+      answer: "Yes. You get the complete codebase to deploy on your own Vercel and own it outright, with no lock-in."
     },
     {
       question: "What payment gateways do you support?",
-      answer: "Stripe is integrated by default, but we can add others on request."
+      answer: "Stripe is integrated by default, and others can be added on request."
     },
     {
       question: "Is the admin panel included?",
-      answer: "Yes, both plans include a full admin dashboard."
+      answer: "Yes, it ships with a full admin dashboard for orders, stock, and customers."
     },
     {
       question: "How long does setup take?",
-      answer: "Launch Ready stores are typically delivered within 5–7 days. Custom Pro timelines vary depending on complexity."
+      answer: "With one-click deploy to Vercel, your store can be live in minutes. Custom changes depend on scope."
     }
   ]
 
