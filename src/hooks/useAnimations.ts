@@ -35,11 +35,29 @@ export const useAnimations = () => {
     opacity: { duration: 1.2, delay },
   })
 
+  const staggerContainer = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+    },
+  }
+
+  const itemFadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" as const },
+    },
+  }
+
   return {
     fadeInUp,
     fadeInLeft,
     fadeInRight,
     floatingAnimation,
     floatingTransition,
+    staggerContainer,
+    itemFadeUp,
   }
 } 

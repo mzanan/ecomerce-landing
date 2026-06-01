@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, useMemo } from "react"
 import { Feature } from "./useFeatures.types"
 
 export const useFeatures = () => {
-  const { fadeInUp, fadeInLeft, fadeInRight } = useAnimations()
+  const { fadeInUp, fadeInLeft, fadeInRight, itemFadeUp } = useAnimations()
   const mediaRefs = useRef<(HTMLElement | null)[]>([])
   const [mediaRatios, setMediaRatios] = useState<Record<number, number>>({})
   const [openedMedia, setOpenedMedia] = useState<{
@@ -140,7 +140,7 @@ export const useFeatures = () => {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 1.2 },
+      transition: { duration: 0.6 },
     },
   }
 
@@ -149,7 +149,12 @@ export const useFeatures = () => {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 1.2, delay: 0.3 },
+      transition: {
+        duration: 0.6,
+        when: "beforeChildren" as const,
+        staggerChildren: 0.05,
+        delayChildren: 0.05,
+      },
     },
   }
 
@@ -231,6 +236,7 @@ export const useFeatures = () => {
     fadeInUp,
     fadeInLeft,
     fadeInRight,
+    itemFadeUp,
     features,
     mediaRefs,
     mediaVariants,

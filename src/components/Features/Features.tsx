@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { motion, AnimatePresence } from "motion/react"
+import { motion, AnimatePresence, type Variants } from "motion/react"
 import { Check, X } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { useFeatures } from "./useFeatures"
@@ -108,28 +108,28 @@ const MediaRenderer = ({ feature, isModal = false, videoRef, className = "" }: M
 }
 
 // --- Sub-component: Feature Info Card ---
-const FeatureInfo = ({ feature }: { feature: Feature }) => (
-  <Card className="bg-transparent border-none hover:bg-white/70 
+const FeatureInfo = ({ feature, itemVariants }: { feature: Feature; itemVariants: Variants }) => (
+  <Card className="bg-transparent border-none hover:bg-white/70
                   p-2 transition-all duration-300 w-fit mx-auto">
-    <div className="flex items-center justify-center md:p-6 md:pb-2">
-      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-yellow-300/10 
+    <motion.div variants={itemVariants} className="flex items-center justify-center md:p-6 md:pb-2">
+      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-yellow-300/10
                       hidden md:flex items-center justify-center flex-none">
         <span className="text-xl md:text-2xl">{feature.icon}</span>
       </div>
       <h3 className="text-xl md:text-2xl font-bold text-black leading-tight">
         {feature.title}
       </h3>
-    </div>
+    </motion.div>
     <div className="hidden md:inline flex-1 overflow-y-auto px-6 pb-6 min-h-0">
-      <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">
+      <motion.p variants={itemVariants} className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">
         {feature.description}
-      </p>
+      </motion.p>
       <ul className="space-y-2">
         {feature.features.map((item: string, idx: number) => (
-          <li key={idx} className="flex items-start gap-3">
+          <motion.li variants={itemVariants} key={idx} className="flex items-start gap-3">
             <Check className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-1 flex-none" />
             <span className="text-sm md:text-base text-gray-700">{item}</span>
-          </li>
+          </motion.li>
         ))}
       </ul>
     </div>
@@ -143,6 +143,7 @@ export const Features = () => {
     mediaRefs,
     mediaVariants,
     textVariants,
+    itemFadeUp,
     openedMedia,
     handleMediaClick,
     handleCloseModal,
@@ -197,7 +198,7 @@ export const Features = () => {
                 custom={isEven}
                 variants={textVariants}
               >
-                <FeatureInfo feature={feature} />
+                <FeatureInfo feature={feature} itemVariants={itemFadeUp} />
               </motion.div>
             </motion.div>
           )
