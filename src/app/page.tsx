@@ -1,11 +1,14 @@
 "use client"
 
+import dynamic from "next/dynamic"
+
 import { Header } from "@/components/Header/Header"
 import { Hero } from "@/components/Hero/Hero"
-import { Demo } from "@/components/Demo/Demo"
 import { FAQ } from "@/components/FAQ/FAQ"
 import { Features } from "@/components/Features/Features"
 import { Contact } from "@/components/Contact/Contact"
+
+const Demo = dynamic(() => import("@/components/Demo/Demo").then((m) => m.Demo))
 
 export default function Home() {
   return (
