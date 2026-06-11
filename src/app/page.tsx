@@ -7,6 +7,7 @@ import { Hero } from "@/components/Hero/Hero"
 import { FAQ } from "@/components/FAQ/FAQ"
 import { Features } from "@/components/Features/Features"
 import { Contact } from "@/components/Contact/Contact"
+import { Footer } from "@/components/Footer/Footer"
 
 const Demo = dynamic(() => import("@/components/Demo/Demo").then((m) => m.Demo))
 
@@ -21,7 +22,10 @@ export default function Home() {
         <Demo />
         <Features />
         <Contact />
-        <FAQ />
+        <div className="relative">
+          <FAQ />
+          <Footer />
+        </div>
       </div>
     </div>
   )
