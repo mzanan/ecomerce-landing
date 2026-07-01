@@ -19,7 +19,6 @@ export const useContact = () => {
   useEffect(() => {
     if (state.succeeded) {
       toast.success("Message sent successfully!")
-      setFormData({ name: "", email: "", subject: "", message: "" })
     }
   }, [state.succeeded])
 
