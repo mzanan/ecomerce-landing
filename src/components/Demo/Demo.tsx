@@ -5,32 +5,30 @@ import { motion } from "motion/react"
 import { PhoneMockup } from "@/components/PhoneMockup/PhoneMockup"
 import { useDemo } from "./useDemo"
 
+type DemoItemProps = {
+  src: string
+  idx: number | string
+  onEnded?: () => void
+  setVideoRef: (key: string, el: HTMLVideoElement | null) => void
+}
+
+const DemoItem = ({ src, idx, onEnded, setVideoRef }: DemoItemProps) => (
+  <PhoneMockup
+    key={`demo-video-${idx}`}
+    videoSrc={src}
+    setVideoRef={(el) => setVideoRef(`mobile-${idx}`, el)}
+    animate={false}
+    height="min-h-[480px] max-h-[680px]"
+    autoPlay
+    playsInline
+    muted
+    onEnded={onEnded}
+  />
+)
+
 export const Demo = () => {
   const { slidePairs, setVideoRef, staggerContainer, itemFadeUp } = useDemo()
   const [mobileIndex, setMobileIndex] = useState(0)
-
-  const DemoItem = ({
-    src,
-    idx,
-    onEnded,
-  }: {
-    src: string,
-    idx: number | string,
-    onEnded?: () => void,
-    className?: string
-  }) => (
-    <PhoneMockup
-      key={`demo-video-${idx}`}
-      videoSrc={src}
-      setVideoRef={(el) => setVideoRef(`mobile-${idx}`, el)}
-      animate={false}
-      height="min-h-[480px] max-h-[680px]"
-      autoPlay
-      playsInline
-      muted
-      onEnded={onEnded}
-    />
-  )
 
   return (
     <section id="demo" className="section-layout h-dvh items-center">
@@ -45,6 +43,7 @@ export const Demo = () => {
           idx={`mobile-loop-${mobileIndex}`}
           src={slidePairs[mobileIndex].mobile}
           onEnded={() => setMobileIndex((prev) => (prev + 1) % slidePairs.length)}
+          setVideoRef={setVideoRef}
         />
       </motion.div>
 
@@ -67,6 +66,7 @@ export const Demo = () => {
             <DemoItem
               idx={idx}
               src={pair.mobile}
+              setVideoRef={setVideoRef}
             />
           </motion.div>
         ))}
