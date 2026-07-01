@@ -17,6 +17,17 @@ export const usePhoneMockup = () => {
     return () => clearTimeout(timeout)
   }, [buttonOrder])
 
+  const triggerFlash = (elementIndex: number) => {
+    setFlashingElements(prev => new Set(prev).add(elementIndex))
+    setTimeout(() => {
+      setFlashingElements(prev => {
+        const newSet = new Set(prev)
+        newSet.delete(elementIndex)
+        return newSet
+      })
+    }, 400)
+  }
+
   // Color change effects with different intervals
   useEffect(() => {
     const intervals = [
@@ -40,17 +51,6 @@ export const usePhoneMockup = () => {
 
     return () => timeouts.forEach(clearTimeout)
   }, [elementColors])
-
-  const triggerFlash = (elementIndex: number) => {
-    setFlashingElements(prev => new Set(prev).add(elementIndex))
-    setTimeout(() => {
-      setFlashingElements(prev => {
-        const newSet = new Set(prev)
-        newSet.delete(elementIndex)
-        return newSet
-      })
-    }, 400)
-  }
 
   const spring: Transition = {
     type: "spring",
