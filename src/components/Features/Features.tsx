@@ -9,10 +9,12 @@ import { useEffect, useRef, useState } from "react"
 import { Feature } from "./useFeatures.types"
 
 // --- Interfaces ---
+type VideoRefCallback = (el: HTMLVideoElement | null) => void
+
 interface MediaRendererProps {
   feature: Feature
   isModal?: boolean
-  videoRef?: React.Ref<HTMLVideoElement>
+  videoRef?: VideoRefCallback
   className?: string
 }
 
@@ -22,7 +24,7 @@ const toMediaArray = (media: string | string[]) =>
 interface SequentialVideoProps {
   srcs: string[]
   isModal?: boolean
-  videoRef?: React.Ref<HTMLVideoElement>
+  videoRef?: VideoRefCallback
   className?: string
 }
 
@@ -33,8 +35,7 @@ const SequentialVideo = ({ srcs, isModal = false, videoRef, className = "" }: Se
 
   const assignRef = (el: HTMLVideoElement | null) => {
     innerRef.current = el
-    if (typeof videoRef === "function") videoRef(el)
-    else if (videoRef) (videoRef as React.MutableRefObject<HTMLVideoElement | null>).current = el
+    videoRef?.(el)
   }
 
   useEffect(() => {
@@ -73,7 +74,7 @@ const MediaRenderer = ({ feature, isModal = false, videoRef, className = "" }: M
         srcs: toMediaArray(feature.media),
         visibility: "hidden md:block",
         aspectClass: "aspect-video video-compensate-rounded",
-        ref: null,
+        ref: undefined,
       },
     ]
 
@@ -228,7 +229,7 @@ export const Features = () => {
               <MediaRenderer
                 feature={openedMedia.feature}
                 isModal={true}
-                videoRef={modalVideoRef}
+                videoRef={(el) => { modalVideoRef.current = el }}
               />
             </motion.div>
           </motion.div>
