@@ -246,6 +246,16 @@
     @apply bg-gradient-to-r from-pink-400 to-purple-500 bg-clip-text text-transparent;
   }
 
+  .intro-fade {
+    opacity: 0;
+    animation: intro-fade ease-out both;
+  }
+
+  .intro-rise {
+    opacity: 0;
+    animation: intro-rise ease-out both;
+  }
+
   .video-compensate-rounded {
     width: calc(100% + 2px);
     height: calc(100% + 1px);
@@ -253,6 +263,28 @@
     object-fit: cover;
     margin-left: -2px;
     margin-top: -1px;
+  }
+}
+
+@keyframes intro-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

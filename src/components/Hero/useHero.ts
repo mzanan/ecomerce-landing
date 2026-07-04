@@ -7,39 +7,6 @@ export const useHero = () => {
 
   const handleIntroAnimationComplete = () => setIsIntroFinished(true)
 
-  const titleWordFadeIn = (wordIndex: number) => ({
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    transition: { duration: 0.5, delay: wordIndex * 0.13 }
-  })
-
-  const subtitleWordFadeIn = (wordIndex: number) => ({
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    transition: {
-      duration: 0.12,
-      delay: 0.7 + wordIndex * 0.1
-    }
-  })
-
-  const descriptionFadeIn = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 1.2 }
-  }
-
-  const primaryButtonFadeIn = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, delay: 1.45 }
-  }
-
-  const secondaryButtonFadeIn = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, delay: 1.6 }
-  }
-
   const phoneMockupFadeIn = {
     initial: { opacity: 0, y: 40 },
     animate: { opacity: 1, y: 0 },
@@ -79,11 +46,6 @@ export const useHero = () => {
   ]
 
   return {
-    titleWordFadeIn,
-    subtitleWordFadeIn,
-    descriptionFadeIn,
-    primaryButtonFadeIn,
-    secondaryButtonFadeIn,
     phoneMockupFadeIn,
     floatingAnimation,
     floatingTransition,
@@ -91,4 +53,4 @@ export const useHero = () => {
     isIntroFinished,
     handleIntroAnimationComplete,
   }
-} 
+}

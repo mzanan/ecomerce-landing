@@ -1,22 +1,27 @@
 "use client"
 
-import { motion, HTMLMotionProps } from "motion/react"
+import { CSSProperties } from "react"
 import { ArrowRight } from "lucide-react"
 import { PrimaryButton, SecondaryButton } from "./index"
 import { COMPANY } from "@/lib/socials"
 
+interface IntroAnimation {
+    className?: string
+    style?: CSSProperties
+}
+
 interface ActionButtonsProps {
     className?: string
-    primaryButtonAnimation?: HTMLMotionProps<"div">
-    secondaryButtonAnimation?: HTMLMotionProps<"div">
+    primaryButtonAnimation?: IntroAnimation
+    secondaryButtonAnimation?: IntroAnimation
 }
 
 export const ActionButtons = ({ className, primaryButtonAnimation, secondaryButtonAnimation }: ActionButtonsProps) => {
     return (
-        <motion.div className={`flex flex-row gap-4 items-center justify-center ${className}`}>
-            <motion.div
-                className="max-w-[290px] w-full"
-                {...primaryButtonAnimation}
+        <div className={`flex flex-row gap-4 items-center justify-center ${className}`}>
+            <div
+                className={`max-w-[290px] w-full ${primaryButtonAnimation?.className ?? ""}`}
+                style={primaryButtonAnimation?.style}
             >
                 <PrimaryButton
                     fullWidth
@@ -27,10 +32,10 @@ export const ActionButtons = ({ className, primaryButtonAnimation, secondaryButt
                     <span className="inline sm:hidden">Start Now</span>
                     <ArrowRight className="w-5 h-5 ml-2 hidden md:inline" />
                 </PrimaryButton>
-            </motion.div>
-            <motion.div
-                className="max-w-[290px] w-full"
-                {...secondaryButtonAnimation}
+            </div>
+            <div
+                className={`max-w-[290px] w-full ${secondaryButtonAnimation?.className ?? ""}`}
+                style={secondaryButtonAnimation?.style}
             >
                 <SecondaryButton
                     fullWidth
@@ -41,7 +46,7 @@ export const ActionButtons = ({ className, primaryButtonAnimation, secondaryButt
 
                     <span className="inline sm:hidden">Live Demo</span>
                 </SecondaryButton>
-            </motion.div>
-        </motion.div>
+            </div>
+        </div>
     )
 }
