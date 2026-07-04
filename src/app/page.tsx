@@ -17,7 +17,7 @@ export default function Home() {
       <div className="fixed inset-0 opacity-10 pointer-events-none bg-grid-pattern" />
       <Header />
 
-      <div className="flex flex-col gap-20">
+      <main className="flex flex-col gap-20">
         <Hero />
         <Demo />
         <Features />
@@ -26,7 +26,7 @@ export default function Home() {
           <FAQ />
           <Footer />
         </div>
-      </div>
+      </main>
     </div>
   )
 }

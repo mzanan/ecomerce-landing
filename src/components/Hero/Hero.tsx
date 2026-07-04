@@ -36,7 +36,7 @@ export const Hero = () => {
                 </motion.span>
               ))}
             </motion.h1>
-            <motion.h1 className="xs:text-2xl xm:text-3xl lg:text-7xl font-bold bg-gradient-text">
+            <motion.p className="xs:text-2xl xm:text-3xl lg:text-7xl font-bold bg-gradient-text">
               {"No code, no delays.".split(" ").map((word, index) => (
                 <motion.span
                   key={index}
@@ -46,7 +46,7 @@ export const Hero = () => {
                   {word}
                 </motion.span>
               ))}
-            </motion.h1>
+            </motion.p>
           </div>
 
           <motion.p
