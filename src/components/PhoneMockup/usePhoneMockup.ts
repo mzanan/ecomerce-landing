@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { type Transition } from "motion/react"
 
 export const usePhoneMockup = () => {
@@ -8,16 +8,16 @@ export const usePhoneMockup = () => {
   const [flashingElements, setFlashingElements] = useState<Set<number>>(new Set())
 
   useEffect(() => {
-    const timeout = setTimeout(() => setOrder(shuffle(order)), 1500)
-    return () => clearTimeout(timeout)
-  }, [order])
+    const interval = setInterval(() => setOrder((prev) => shuffle(prev)), 2600)
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
-    const timeout = setTimeout(() => setButtonOrder(shuffle(buttonOrder)), 1000)
-    return () => clearTimeout(timeout)
-  }, [buttonOrder])
+    const interval = setInterval(() => setButtonOrder((prev) => shuffle(prev)), 2100)
+    return () => clearInterval(interval)
+  }, [])
 
-  const triggerFlash = (elementIndex: number) => {
+  const triggerFlash = useCallback((elementIndex: number) => {
     setFlashingElements(prev => new Set(prev).add(elementIndex))
     setTimeout(() => {
       setFlashingElements(prev => {
@@ -26,31 +26,24 @@ export const usePhoneMockup = () => {
         return newSet
       })
     }, 400)
-  }
+  }, [])
 
-  // Color change effects with different intervals
   useEffect(() => {
-    const intervals = [
-      2500, // Header
-      3200, // Big card
-      2800, // White card
-      3500, // Gray card
-      2200, // Small purple button
-      2900, // Small teal button
-      3800  // Round button
-    ]
+    const intervals = [2500, 3200, 2800, 3500, 2200, 2900, 3800]
 
-    const timeouts = intervals.map((interval, index) => {
-      return setTimeout(() => {
-        const newColors = [...elementColors]
-        newColors[index] = getRandomColor()
-        setElementColors(newColors)
+    const ids = intervals.map((interval, index) =>
+      setInterval(() => {
+        setElementColors((prev) => {
+          const next = [...prev]
+          next[index] = getRandomColor()
+          return next
+        })
         triggerFlash(index)
       }, interval)
-    })
+    )
 
-    return () => timeouts.forEach(clearTimeout)
-  }, [elementColors])
+    return () => ids.forEach(clearInterval)
+  }, [triggerFlash])
 
   const spring: Transition = {
     type: "spring",

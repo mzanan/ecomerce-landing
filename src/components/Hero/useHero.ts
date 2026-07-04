@@ -49,28 +49,28 @@ export const useHero = () => {
 
   const mockupFloatingCards = [
     {
-      className: "absolute top-10 -left-10 md:-left-16 bg-white backdrop-blur-sm rounded-full px-3 py-1 shadow-lg",
+      className: "absolute top-10 -left-10 md:-left-16 bg-white rounded-full px-3 py-1 shadow-lg",
       content: "🌐 E-commerce Store",
       animationDelay: 0.2,
       animationDuration: 3.5,
       animationType: { y: [0, 8, 0] },
     },
     {
-      className: "absolute top-24 -right-6 md:-right-12 bg-white backdrop-blur-sm rounded-full px-3 py-1 shadow-lg",
+      className: "absolute top-24 -right-6 md:-right-12 bg-white rounded-full px-3 py-1 shadow-lg",
       content: "💳 Secure Payments",
       animationDelay: 0.3,
       animationDuration: 3,
       animationType: { y: [0, -6, 0] },
     },
     {
-      className: "absolute bottom-16 -left-10 md:-left-20 bg-white backdrop-blur-sm rounded-full px-3 py-1 shadow-lg",
+      className: "absolute bottom-16 -left-10 md:-left-20 bg-white rounded-full px-3 py-1 shadow-lg",
       content: "📱 Mobile Optimized",
       animationDelay: 0.4,
       animationDuration: 3.5,
       animationType: { y: [0, 10, 0] },
     },
     {
-      className: "absolute bottom-2 -right-10 md:-right-16 bg-white backdrop-blur-sm rounded-full px-3 py-1 shadow-lg",
+      className: "absolute bottom-2 -right-10 md:-right-16 bg-white rounded-full px-3 py-1 shadow-lg",
       content: "📊 Analytics Dashboard",
       animationDelay: 0.5,
       animationDuration: 4,
