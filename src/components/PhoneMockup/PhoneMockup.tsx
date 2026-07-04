@@ -1,6 +1,8 @@
 "use client"
 
-import { motion } from "motion/react"
+import { useRef } from "react"
+import { motion, useInView } from "motion/react"
+import { useViewportVideoPlayback } from "@/hooks/useViewportVideoPlayback"
 import { usePhoneMockup } from "./usePhoneMockup"
 import type { PhoneMockupProps, AnimatedElementProps } from "./types"
 
@@ -21,15 +23,20 @@ export const PhoneMockup = ({
   loop = true,
   onEnded
 }: PhoneMockupProps) => {
+  const rootRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const isInView = useInView(rootRef, { margin: "25% 0px" })
   const {
     order,
     buttonOrder,
     elementColors,
     flashingElements,
     spring,
-  } = usePhoneMockup()
+  } = usePhoneMockup(!videoSrc && isInView)
+  useViewportVideoPlayback(videoRef, Boolean(videoSrc) && autoPlay)
   return (
     <motion.div
+      ref={rootRef}
       className={`relative bg-gray-900 rounded-[40px] border-[8px] border-gray-700 overflow-hidden h-full aspect-[9/16] ${className} ${width} ${height}`}
       initial={animate ? { opacity: 0, y: 60 } : undefined}
       animate={animate ? (isIntroFinished && floatingAnimation ? floatingAnimation : { opacity: 1, y: 0 }) : undefined}
@@ -38,7 +45,10 @@ export const PhoneMockup = ({
     >
       {videoSrc ? (
         <video
-          ref={setVideoRef}
+          ref={(el) => {
+            videoRef.current = el
+            setVideoRef?.(el)
+          }}
           src={videoSrc}
           poster={videoSrc.replace(/\.mp4$/, ".webp")}
           preload="none"

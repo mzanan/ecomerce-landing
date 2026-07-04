@@ -52,12 +52,13 @@ export const LazyVideo = ({
         for (const entry of entries) {
           if (entry.isIntersecting) {
             load();
-            io.disconnect();
-            break;
+            if (autoPlay) el.play().catch(() => {});
+          } else {
+            el.pause();
           }
         }
       },
-      { rootMargin: "50% 0px" },
+      { rootMargin: "100% 0px" },
     );
 
     io.observe(el);
