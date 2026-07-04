@@ -18,6 +18,7 @@ export const PhoneMockup = ({
   autoPlay = true,
   playsInline = true,
   muted = true,
+  loop = true,
   onEnded
 }: PhoneMockupProps) => {
   const {
@@ -41,7 +42,7 @@ export const PhoneMockup = ({
           src={videoSrc}
           poster={videoSrc.replace(/\.mp4$/, ".webp")}
           preload="none"
-          loop
+          loop={loop}
           muted={muted}
           playsInline={playsInline}
           autoPlay={autoPlay}
@@ -54,11 +55,9 @@ export const PhoneMockup = ({
             <div className="absolute inset-0 opacity-20 bg-grid-pattern-small"></div>
 
             <AnimatedElement
-              className="absolute top-0 left-0 right-0 h-12 backdrop-blur-sm flex items-center justify-between px-4"
+              className="absolute top-0 left-0 right-0 h-12 flex items-center justify-between px-4"
               elementColor={elementColors[0]}
               isFlashing={flashingElements.has(0)}
-              glowColor="rgba(147, 51, 234, 0.5)"
-              brightness={1.1}
             >
               <div className="w-8 h-3 rounded-full bg-white"></div>
               <div className="w-20 h-3 rounded-full bg-white"></div>
@@ -89,26 +88,17 @@ export const PhoneMockup = ({
   )
 }
 
-const AnimatedElement = ({ className, elementColor, isFlashing, glowColor, brightness, children }: AnimatedElementProps) => (
+const AnimatedElement = ({ className, elementColor, isFlashing, children }: AnimatedElementProps) => (
   <motion.div
-    className={`${className} ${elementColor}`}
-    animate={{
-      backgroundColor: elementColor,
-      scale: isFlashing ? [1, 1.1, 1] : 1,
-      boxShadow: isFlashing ? [
-        `0 0 0 0 ${glowColor}`,
-        `0 0 20px 5px ${glowColor}`,
-        `0 0 0 0 ${glowColor}`
-      ] : "0 0 0 0 rgba(0,0,0,0)",
-      filter: isFlashing ? `brightness(${brightness})` : "brightness(1)"
-    }}
-    transition={{
-      backgroundColor: { duration: 1.5, ease: "easeInOut" },
-      scale: { duration: 0.4, ease: "easeInOut" },
-      boxShadow: { duration: 0.4, ease: "easeInOut" },
-      filter: { duration: 0.4, ease: "easeInOut" }
-    }}
+    className={`${className} ${elementColor} transition-colors duration-[1500ms] ease-in-out`}
+    animate={{ scale: isFlashing ? [1, 1.08, 1] : 1 }}
+    transition={{ duration: 0.4, ease: "easeInOut" }}
   >
+    <motion.span
+      className="absolute inset-0 rounded-[inherit] bg-white pointer-events-none"
+      animate={{ opacity: isFlashing ? [0, 0.3, 0] : 0 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+    />
     {children}
   </motion.div>
 )
@@ -120,31 +110,25 @@ const renderReorderableElement = (index: number, buttonOrder: number[], elementC
     case 0:
       return (
         <AnimatedElement
-          className="w-full h-40 rounded-xl opacity-30"
+          className="relative w-full h-40 rounded-xl opacity-30"
           elementColor={elementColors[1]}
           isFlashing={isFlashing}
-          glowColor="rgba(147, 51, 234, 0.6)"
-          brightness={1.2}
         />
       )
     case 1:
       return (
         <AnimatedElement
-          className="w-full h-20 rounded-xl opacity-10"
+          className="relative w-full h-20 rounded-xl opacity-10"
           elementColor={elementColors[2]}
           isFlashing={isFlashing}
-          glowColor="rgba(255, 255, 255, 0.4)"
-          brightness={1.3}
         />
       )
     case 2:
       return (
         <AnimatedElement
-          className="w-full h-20 rounded-xl opacity-20"
+          className="relative w-full h-20 rounded-xl opacity-20"
           elementColor={elementColors[3]}
           isFlashing={isFlashing}
-          glowColor="rgba(156, 163, 175, 0.5)"
-          brightness={1.2}
         />
       )
     case 3:
@@ -169,11 +153,9 @@ const renderReorderableElement = (index: number, buttonOrder: number[], elementC
     case 4:
       return (
         <AnimatedElement
-          className="w-full h-12 rounded-full mt-auto opacity-80"
+          className="relative w-full h-12 rounded-full mt-auto opacity-80"
           elementColor={elementColors[6]}
           isFlashing={isFlashing}
-          glowColor="rgba(20, 184, 166, 0.7)"
-          brightness={1.2}
         />
       )
     default:
@@ -187,11 +169,9 @@ const renderButtonElement = (index: number, elementColors: string[], flashingEle
 
   return (
     <AnimatedElement
-      className={`w-full h-16 rounded-xl opacity-${index === 0 ? '20' : '30'}`}
+      className={`relative w-full h-16 rounded-xl ${index === 0 ? 'opacity-20' : 'opacity-30'}`}
       elementColor={elementColors[colorIndex]}
       isFlashing={isFlashing}
-      glowColor={`rgba(${index === 0 ? '147, 51, 234' : '20, 184, 166'}, 0.6)`}
-      brightness={1.3}
     />
   )
 }

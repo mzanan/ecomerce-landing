@@ -15,6 +15,7 @@ export interface PhoneMockupProps {
   autoPlay?: boolean
   playsInline?: boolean
   muted?: boolean
+  loop?: boolean
   onEnded?: () => void
 }
 
@@ -22,7 +23,5 @@ export interface AnimatedElementProps {
   className: string
   elementColor: string
   isFlashing: boolean
-  glowColor: string
-  brightness: number
   children?: ReactNode
 }

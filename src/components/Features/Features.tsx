@@ -117,9 +117,9 @@ const FeatureInfo = ({ feature, itemVariants }: { feature: Feature; itemVariants
                       hidden md:flex items-center justify-center flex-none">
         <span className="text-xl md:text-2xl">{feature.icon}</span>
       </div>
-      <h3 className="text-xl md:text-2xl font-bold text-black leading-tight">
+      <h2 className="text-xl md:text-2xl font-bold text-black leading-tight">
         {feature.title}
-      </h3>
+      </h2>
     </motion.div>
     <div className="hidden md:inline flex-1 overflow-y-auto px-6 pb-6 min-h-0">
       <motion.p variants={itemVariants} className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">

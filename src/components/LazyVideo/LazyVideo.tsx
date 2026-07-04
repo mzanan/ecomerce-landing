@@ -8,6 +8,8 @@ type Props = {
   className?: string;
   playbackRate?: number;
   autoPlay?: boolean;
+  loop?: boolean;
+  onEnded?: () => void;
 };
 
 export const LazyVideo = ({
@@ -16,6 +18,8 @@ export const LazyVideo = ({
   className,
   playbackRate = 1,
   autoPlay = true,
+  loop = true,
+  onEnded,
 }: Props) => {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -74,10 +78,11 @@ export const LazyVideo = ({
     <video
       ref={ref}
       muted
-      loop
+      loop={loop}
       playsInline
       preload="none"
       poster={poster}
+      onEnded={onEnded}
       className={className}
       suppressHydrationWarning
     />

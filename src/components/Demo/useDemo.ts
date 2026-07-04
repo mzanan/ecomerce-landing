@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import { useAnimations } from "@/hooks/useAnimations"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 
 export const useDemo = () => {
   const { staggerContainer, itemFadeUp } = useAnimations()
@@ -30,6 +31,11 @@ export const useDemo = () => {
     acc[`mobile-${idx}`] = false
     return acc
   }, {} as { [key: string]: boolean })
+
+  const isMobile = useMediaQuery("(max-width: 767px)")
+  const [mobileIndex, setMobileIndex] = useState(0)
+  const advanceMobileVideo = () =>
+    setMobileIndex((prev) => (prev + 1) % slidePairs.length)
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [activeView, setActiveView] = useState<"desktop" | "mobile">("desktop")
@@ -131,5 +137,8 @@ export const useDemo = () => {
     emblaRef,
     staggerContainer,
     itemFadeUp,
+    isMobile,
+    mobileIndex,
+    advanceMobileVideo,
   }
 } 
