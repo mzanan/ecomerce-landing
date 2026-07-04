@@ -1,21 +1,23 @@
 import { useCallback, useEffect, useState } from "react"
 import { type Transition } from "motion/react"
 
-export const usePhoneMockup = () => {
+export const usePhoneMockup = (active = true) => {
   const [order, setOrder] = useState(initialOrder)
   const [buttonOrder, setButtonOrder] = useState([0, 1])
   const [elementColors, setElementColors] = useState(initialColors)
   const [flashingElements, setFlashingElements] = useState<Set<number>>(new Set())
 
   useEffect(() => {
+    if (!active) return
     const interval = setInterval(() => setOrder((prev) => shuffle(prev)), 2600)
     return () => clearInterval(interval)
-  }, [])
+  }, [active])
 
   useEffect(() => {
+    if (!active) return
     const interval = setInterval(() => setButtonOrder((prev) => shuffle(prev)), 2100)
     return () => clearInterval(interval)
-  }, [])
+  }, [active])
 
   const triggerFlash = useCallback((elementIndex: number) => {
     setFlashingElements(prev => new Set(prev).add(elementIndex))
@@ -29,6 +31,7 @@ export const usePhoneMockup = () => {
   }, [])
 
   useEffect(() => {
+    if (!active) return
     const intervals = [2500, 3200, 2800, 3500, 2200, 2900, 3800]
 
     const ids = intervals.map((interval, index) =>
@@ -43,7 +46,7 @@ export const usePhoneMockup = () => {
     )
 
     return () => ids.forEach(clearInterval)
-  }, [triggerFlash])
+  }, [active, triggerFlash])
 
   const spring: Transition = {
     type: "spring",

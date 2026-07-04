@@ -6,6 +6,7 @@ import { Check, X } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { useFeatures } from "./useFeatures"
 import { useEffect, useRef, useState } from "react"
+import { useViewportVideoPlayback } from "@/hooks/useViewportVideoPlayback"
 import { Feature } from "./useFeatures.types"
 
 // --- Interfaces ---
@@ -32,6 +33,7 @@ const SequentialVideo = ({ srcs, isModal = false, videoRef, className = "" }: Se
   const innerRef = useRef<HTMLVideoElement | null>(null)
   const [index, setIndex] = useState(0)
   const single = srcs.length <= 1
+  useViewportVideoPlayback(innerRef, !isModal)
 
   const assignRef = (el: HTMLVideoElement | null) => {
     innerRef.current = el
