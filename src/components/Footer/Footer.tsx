@@ -1,5 +1,3 @@
-"use client"
-
 import { COMPANY } from "@/lib/socials"
 
 const ATTRIBUTION_URL = "https://itsmatias.com"
